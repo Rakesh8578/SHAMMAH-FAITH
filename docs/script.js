@@ -50,30 +50,27 @@ function searchSongs() {
 function downloadLyrics() {
   const lyrics = document.getElementById("lyrics").innerText;
 
-  if (lyrics.includes("ఎంచుకోండి")) {
-    alert("ముందు పాటను ఎంచుకోండి");
+  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
+    alert("ముందుగా పాటను ఎంచుకోండి");
     return;
   }
 
-  const blob = new Blob([lyrics], { type: "text/plain" });
+  // UTF-8 BOM added for Telugu support
+  const bom = "\uFEFF";
+  const blob = new Blob([bom + lyrics], {
+    type: "text/plain;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
+  a.href = url;
   a.download = "shammah-faith-lyrics.txt";
+  document.body.appendChild(a);
   a.click();
-}
 
-/* DOWNLOAD PDF */
-function downloadPDF() {
-  const lyrics = document.getElementById("lyrics").innerText;
-
-  if (lyrics.includes("ఎంచుకోండి")) {
-    alert("ముందు పాటను ఎంచుకోండి");
-    return;
-  }
-
-  const win = window.open("", "", "width=800,height=600");
-  win.document.write("<pre>" + lyrics + "</pre>");
-  win.print();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 /* BACK / ESC */
@@ -97,3 +94,4 @@ window.onload = () => {
   if (saved) document.getElementById("lyrics").innerText = saved;
 };
       
+
