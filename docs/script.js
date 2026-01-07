@@ -77,3 +77,41 @@ ${lyrics}
   a.download = "shammah-faith-lyrics.doc";
   a.click();
 }
+
+/* ✅ DOWNLOAD WORD (.DOCX) – TELUGU SAFE */
+function downloadWord() {
+  const lyrics = document.getElementById("lyrics").innerText;
+
+  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
+    alert("ముందుగా పాటను ఎంచుకోండి");
+    return;
+  }
+
+  const content = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word"
+      xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="UTF-8">
+<title>Shammah Faith Lyrics</title>
+</head>
+<body style="font-family:Noto Sans Telugu,Arial; font-size:18px; white-space:pre-wrap;">
+${lyrics}
+</body>
+</html>
+`;
+
+  const blob = new Blob([content], {
+    type: "application/msword;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "shammah-faith-lyrics.doc";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
