@@ -24,75 +24,38 @@ const songs = {
 };
 
 /* SHOW SONG */
-function showSong(number) {
-  const lyrics = songs[number];
-  document.getElementById("lyrics").innerText = lyrics;
-
-  history.pushState({ page: "song" }, "", "#song");
-  localStorage.setItem("lastSong", lyrics);
+function showSong(n) {
+  document.getElementById("lyrics").innerText = songs[n];
 }
 
-/* SEARCH (TELUGU + ENGLISH) */
+/* SEARCH */
 function searchSongs() {
-  const input = document.getElementById("searchBox").value.toLowerCase();
-  const buttons = document.querySelectorAll("#songButtons button");
-
-  buttons.forEach(btn => {
-    const text =
-      btn.innerText.toLowerCase() + " " +
-      btn.dataset.search.toLowerCase();
-
-    btn.style.display = text.includes(input) ? "block" : "none";
+  const val = document.getElementById("searchBox").value.toLowerCase();
+  document.querySelectorAll("#songButtons button").forEach(btn => {
+    const text = btn.innerText.toLowerCase() + btn.dataset.search;
+    btn.style.display = text.includes(val) ? "block" : "none";
   });
 }
 
-/* DOWNLOAD TXT */
+/* REAL PDF DOWNLOAD */
 function downloadPDF() {
-  const lyrics = document.getElementById("lyrics").innerText;
+  if (!window.jspdf) {
+    alert("PDF library not loaded");
+    return;
+  }
 
-  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
+  const lyrics = document.getElementById("lyrics").innerText;
+  if (!lyrics || lyrics.includes("ఎంచుకోండి")) {
     alert("ముందుగా పాటను ఎంచుకోండి");
     return;
   }
 
-  // Get jsPDF
   const { jsPDF } = window.jspdf;
-
-  // Create PDF
-  const doc = new jsPDF("p", "mm", "a4");
+  const doc = new jsPDF();
 
   doc.setFontSize(14);
-
-  // Split Telugu text properly
   const lines = doc.splitTextToSize(lyrics, 180);
   doc.text(lines, 15, 20);
 
-  // Download PDF directly
   doc.save("shammah-faith-lyrics.pdf");
 }
-
-/* BACK / ESC */
-function goHome() {
-  document.getElementById("lyrics").innerText = "పాటను ఎంచుకోండి 👆";
-  localStorage.removeItem("lastSong");
-
-  document.querySelectorAll("#songButtons button")
-    .forEach(b => b.style.display = "block");
-}
-
-window.onpopstate = goHome;
-
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") goHome();
-});
-
-/* RESTORE */
-window.onload = () => {
-  const saved = localStorage.getItem("lastSong");
-  if (saved) document.getElementById("lyrics").innerText = saved;
-};
-      
-
-
-
-
