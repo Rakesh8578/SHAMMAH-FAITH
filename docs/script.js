@@ -55,10 +55,10 @@ function downloadLyrics() {
     return;
   }
 
-  // UTF-8 BOM added for Telugu support
+  // UTF-8 BOM (fix Telugu text issue on mobile)
   const bom = "\uFEFF";
   const blob = new Blob([bom + lyrics], {
-    type: "text/plain;charset=utf-8;"
+    type: "text/plain;charset=utf-8"
   });
 
   const url = URL.createObjectURL(blob);
@@ -94,4 +94,5 @@ window.onload = () => {
   if (saved) document.getElementById("lyrics").innerText = saved;
 };
       
+
 
