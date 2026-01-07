@@ -1,46 +1,44 @@
 body {
   font-family: Arial, sans-serif;
-  padding: 15px;
-  background: #f5f5f5;
+  text-align: center;
+  background: #f6f6f6;
+  margin: 0;
 }
 
 .site-header {
-  text-align: center;
-  margin-bottom: 15px;
+  background: white;
+  padding: 20px;
 }
 
 .logo {
   width: 80px;
-  display: block;
-  margin: 0 auto 8px;
-}
-
-#searchBox {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
   margin-bottom: 10px;
 }
 
-#songButtons button {
-  margin: 5px;
-  padding: 8px 12px;
-  cursor: pointer;
+#searchBox {
+  width: 90%;
+  padding: 10px;
+  margin: 15px;
+  font-size: 16px;
 }
 
-pre {
-  background: white;
+#songButtons button,
+.download button {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
   padding: 12px;
-  white-space: pre-wrap;
-  line-height: 1.6;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
-.downloads {
-  margin-top: 10px;
-}
-
-.downloads button {
-  margin-right: 8px;
-  padding: 8px 12px;
-  cursor: pointer;
+#lyrics {
+  background: white;
+  margin: 15px;
+  padding: 15px;
+  white-space: pre-line;
+  border-radius: 6px;
 }
