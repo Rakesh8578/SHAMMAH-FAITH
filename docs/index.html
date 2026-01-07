@@ -1,80 +1,59 @@
 <!DOCTYPE html>
-<html lang="te">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
 
-  <!-- Google Verification -->
+  <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="lUPSsgc6lHV0x01c--vS10lxpLyAGBt4yEd3G6rapvo" />
 
-  <!-- SEO -->
-  <title>Shammah Faith – Telugu Christian Song Lyrics</title>
-  <meta name="description" content="Shammah Faith Telugu Christian song lyrics website with YouTube links and downloads.">
-  <meta name="keywords" content="Shammah Faith, Telugu Christian songs, Jesus songs Telugu, Christian lyrics">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHAMMAH FAITH – Telugu Christian Song Lyrics</title>
+
+  <!-- SEO -->
+  <meta name="description" content="SHAMMAH FAITH - Telugu Christian song lyrics website. Worship songs, Christmas songs, praise and gospel lyrics.">
+  <meta name="keywords" content="Telugu Christian songs, Telugu church lyrics, Jesus songs Telugu, Christian worship songs">
+  <meta name="author" content="SHAMMAH FAITH">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="site-header">
-  <img src="logo.jpg" class="logo" alt="Shammah Faith Logo">
-  <h1>SHAMMAH FAITH</h1>
-  <p class="tagline">Telugu Christian Song Lyrics</p>
-</header>
+  <!-- HEADER -->
+  <header class="site-header">
+    <img src="logo.jpg" alt="SHAMMAH FAITH Logo" class="logo">
+    <h1>SHAMMAH FAITH</h1>
+    <p class="tagline">Telugu Christian Song Lyrics</p>
+  </header>
 
-<div class="search-box">
-  <input type="text" id="searchInput" placeholder="పాట పేరు టైప్ చేయండి...">
-</div>
-
-<div id="songs">
-
-  <!-- SONG 1 -->
-  <div class="song">
-    <h3>తార వెలిసింది</h3>
-
-    <pre>
-తార వెలిసింది ఆ నింగిలో ధరణి మురిసింది
-దూత వచ్చింది సువార్తను మాకు తెలిపింది
-రాజులకు రాజు పుట్టాడని
-యూదుల రాజు ఉదయించాడని
-    </pre>
-
-    <div class="song-buttons">
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
-         target="_blank" class="yt-btn">
-         ▶ Watch on YouTube
-      </a>
-
-      <button onclick="downloadLyrics(this)">⬇ Download Lyrics</button>
-    </div>
+  <!-- SEARCH -->
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="పాట పేరు టైప్ చేయండి..." onkeyup="searchSongs()">
   </div>
 
-  <!-- SONG 2 -->
-  <div class="song">
-    <h3>యేసయ్య నామములో</h3>
-
-    <pre>
-యేసయ్య నామములో శక్తి ఉంది
-యేసయ్య ప్రేమలో రక్షణ ఉంది
-    </pre>
-
-    <div class="song-buttons">
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-         target="_blank" class="yt-btn">
-         ▶ Watch on YouTube
-      </a>
-
-      <button onclick="downloadLyrics(this)">⬇ Download Lyrics</button>
-    </div>
+  <!-- SONG BUTTONS -->
+  <div class="songs" id="songButtons">
+    <button onclick="showSong(1)" data-search="తార వెలిసింది christmas">తార వెలిసింది</button>
+    <button onclick="showSong(2)" data-search="యేసయ్య నామము yesayya">యేసయ్య నామము</button>
+    <button onclick="showSong(3)" data-search="ప్రభువా కృప prabhuva krupa">ప్రభువా కృప</button>
   </div>
 
-</div>
+  <!-- BACK BUTTON -->
+  <button id="backBtn" onclick="goHome()" style="display:none;">⬅ Back</button>
 
-<footer>
-  <p>© 2026 SHAMMAH FAITH | For Worship & Educational Purpose</p>
-</footer>
+  <!-- LYRICS -->
+  <pre id="lyrics" style="display:none;"></pre>
 
-<script src="script.js"></script>
+  <!-- DOWNLOAD -->
+  <div class="download-buttons" style="display:none;" id="downloadBtns">
+    <button onclick="downloadTXT()">Download TXT</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 SHAMMAH FAITH | For worship & educational purpose</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
