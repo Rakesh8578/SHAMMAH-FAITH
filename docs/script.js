@@ -25,74 +25,11 @@ const songs = {
 
 /* SHOW SONG */
 function showSong(number) {
-  document.getElementById("lyrics").innerText = songs[number];
-  history.pushState({ page: "song" }, "", "#song");
-  localStorage.setItem("lastSong", number);
-}
-
-/* SEARCH (TELUGU + ENGLISH SHORT FORM) */
-function searchSongs() {
-  const input = document.getElementById("searchBox").value.toLowerCase();
-  const buttons = document.querySelectorAll("#songButtons button");
-
-  buttons.forEach(button => {
-    const text =
-      button.innerText.toLowerCase() + " " +
-      button.getAttribute("data-search").toLowerCase();
-
-    button.style.display = text.includes(input)
-      ? "inline-block"
-      : "none";
-  });
-}
-
-/* DOWNLOAD TXT */
-function downloadLyrics() {
-  const lyrics = document.getElementById("lyrics").innerText;
-  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) return;
-
-  const blob = new Blob([lyrics], { type: "text/plain;charset=utf-8" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "church-lyrics.txt";
-  a.click();
-}
-
-/* DOWNLOAD PDF */
-function downloadPDF() {
-  const lyrics = document.getElementById("lyrics").innerText;
-  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) return;
-
-  const win = window.open("", "", "width=800,height=600");
-  win.document.write("<pre>");
-  win.document.write(lyrics.replace(/\n/g, "<br>"));
-  win.document.write("</pre>");
-  win.document.close();
-  win.print();
-}
-
-/* BACK + ESC */
-function goHomeAuto() {
-  document.getElementById("lyrics").innerText = "పాటను ఎంచుకోండి 👆";
-  localStorage.removeItem("lastSong");
-}
-
-window.onpopstate = goHomeAuto;
-
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") goHomeAuto();
-});
-
-/* RESTORE LAST SONG */
-window.onload = () => {
-  const last = localStorage.getItem("lastSong");
-  if (last) showSong(last);
-};function showSong(number) {
-  const lyricsText = songs[number];
-  document.getElementById("lyrics").innerText = lyricsText;
+  const lyrics = songs[number];
+  document.getElementById("lyrics").innerText = lyrics;
 
   history.pushState({ page: "song" }, "", "#song");
-  localStorage.setItem("lastSong", lyricsText);
+  localStorage.setItem("lastSong", lyrics);
 }
 
 /* SEARCH (TELUGU + ENGLISH) */
@@ -100,14 +37,12 @@ function searchSongs() {
   const input = document.getElementById("searchBox").value.toLowerCase();
   const buttons = document.querySelectorAll("#songButtons button");
 
-  buttons.forEach(button => {
+  buttons.forEach(btn => {
     const text =
-      button.innerText.toLowerCase() + " " +
-      button.getAttribute("data-search").toLowerCase();
+      btn.innerText.toLowerCase() + " " +
+      btn.dataset.search.toLowerCase();
 
-    button.style.display = text.includes(input)
-      ? "inline-block"
-      : "none";
+    btn.style.display = text.includes(input) ? "block" : "none";
   });
 }
 
@@ -115,280 +50,50 @@ function searchSongs() {
 function downloadLyrics() {
   const lyrics = document.getElementById("lyrics").innerText;
 
-  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
-    alert("Please select a song first");
+  if (lyrics.includes("ఎంచుకోండి")) {
+    alert("ముందు పాటను ఎంచుకోండి");
     return;
   }
 
-  const blob = new Blob([lyrics], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-
+  const blob = new Blob([lyrics], { type: "text/plain" });
   const a = document.createElement("a");
-  a.href = url;
-  a.download = "church-lyrics.txt";
-  document.body.appendChild(a);
+  a.href = URL.createObjectURL(blob);
+  a.download = "shammah-faith-lyrics.txt";
   a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
 }
 
 /* DOWNLOAD PDF */
 function downloadPDF() {
   const lyrics = document.getElementById("lyrics").innerText;
 
-  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
-    alert("Please select a song first");
+  if (lyrics.includes("ఎంచుకోండి")) {
+    alert("ముందు పాటను ఎంచుకోండి");
     return;
   }
 
   const win = window.open("", "", "width=800,height=600");
-  win.document.write("<pre style='font-size:16px;font-family:Arial;'>");
-  win.document.write(lyrics.replace(/\n/g, "<br>"));
-  win.document.write("</pre>");
-  win.document.close();
+  win.document.write("<pre>" + lyrics + "</pre>");
   win.print();
 }
 
-/* HOME FUNCTION (AUTO) */
-function goHomeAuto() {
+/* BACK / ESC */
+function goHome() {
   document.getElementById("lyrics").innerText = "పాటను ఎంచుకోండి 👆";
   localStorage.removeItem("lastSong");
 
-  const buttons = document.querySelectorAll("#songButtons button");
-  buttons.forEach(btn => btn.style.display = "inline-block");
+  document.querySelectorAll("#songButtons button")
+    .forEach(b => b.style.display = "block");
 }
 
-/* MOBILE / BROWSER BACK */
-window.onpopstate = function () {
-  goHomeAuto();
-};
+window.onpopstate = goHome;
 
-/* KEYBOARD ESC */
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape") {
-    goHomeAuto();
-    history.pushState(null, "", "#home");
-  }
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") goHome();
 });
 
-/* RESTORE LAST SONG ON REFRESH */
-window.onload = function () {
-  const savedLyrics = localStorage.getItem("lastSong");
-  if (savedLyrics) {
-    document.getElementById("lyrics").innerText = savedLyrics;
-  }
-};యేసయ్య ప్రేమలో రక్షణ ఉంది`,
-    youtube: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-  },
-
-  3: {
-    lyrics: `ప్రభువా నీ కృప అపారం
-నీ ప్రేమ శాశ్వతం`,
-    youtube: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-  }
+/* RESTORE */
+window.onload = () => {
+  const saved = localStorage.getItem("lastSong");
+  if (saved) document.getElementById("lyrics").innerText = saved;
 };
-
-/* =========================
-   SHOW SONG
-   ========================= */
-
-function showSong(number) {
-  const song = songs[number];
-  if (!song) return;
-
-  document.getElementById("lyrics").innerText = song.lyrics;
-
-  // Show YouTube button
-  const ytBtn = document.getElementById("youtubeBtn");
-  if (ytBtn && song.youtube) {
-    ytBtn.href = song.youtube;
-    ytBtn.style.display = "inline-block";
-  }
-
-  history.pushState({ page: "song" }, "", "#song");
-  localStorage.setItem("lastSong", number);
-}
-
-/* =========================
-   SEARCH (TELUGU + ENGLISH)
-   ========================= */
-
-function searchSongs() {
-  const input = document.getElementById("searchBox").value.toLowerCase();
-  const buttons = document.querySelectorAll("#songButtons button");
-
-  buttons.forEach(button => {
-    const text =
-      button.innerText.toLowerCase() + " " +
-      button.getAttribute("data-search").toLowerCase();
-
-    button.style.display = text.includes(input)
-      ? "inline-block"
-      : "none";
-  });
-}
-
-/* =========================
-   DOWNLOAD TXT
-   ========================= */
-
-function downloadLyrics() {
-  const lyrics = document.getElementById("lyrics").innerText;
-
-  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
-    alert("Please select a song first");
-    return;
-  }
-
-  const blob = new Blob([lyrics], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "church-lyrics.txt";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-/* =========================
-   DOWNLOAD PDF
-   ========================= */
-
-function downloadPDF() {
-  const lyrics = document.getElementById("lyrics").innerText;
-
-  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
-    alert("Please select a song first");
-    return;
-  }
-
-  const win = window.open("", "", "width=800,height=600");
-  win.document.write("<pre style='font-size:16px;font-family:Arial;'>");
-  win.document.write(lyrics.replace(/\n/g, "<br>"));
-  win.document.write("</pre>");
-  win.document.close();
-  win.print();
-}
-
-/* =========================
-   HOME (AUTO BACK)
-   ========================= */
-
-function goHomeAuto() {
-  document.getElementById("lyrics").innerText = "పాటను ఎంచుకోండి 👆";
-  localStorage.removeItem("lastSong");
-
-  const ytBtn = document.getElementById("youtubeBtn");
-  if (ytBtn) ytBtn.style.display = "none";
-
-  const buttons = document.querySelectorAll("#songButtons button");
-  buttons.forEach(btn => btn.style.display = "inline-block");
-}
-
-/* MOBILE / BROWSER BACK */
-window.onpopstate = function () {
-  goHomeAuto();
-};
-
-/* KEYBOARD ESC */
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape") {
-    goHomeAuto();
-    history.pushState(null, "", "#home");
-  }
-});
-
-/* RESTORE LAST SONG ON REFRESH */
-window.onload = function () {
-  const lastSongNumber = localStorage.getItem("lastSong");
-  if (lastSongNumber && songs[lastSongNumber]) {
-    showSong(lastSongNumber);
-  }
-};function searchSongs() {
-  const input = document.getElementById("searchBox").value.toLowerCase();
-  const buttons = document.querySelectorAll("#songButtons button");
-
-  buttons.forEach(button => {
-    const text =
-      button.innerText.toLowerCase() + " " +
-      button.getAttribute("data-search").toLowerCase();
-
-    button.style.display = text.includes(input)
-      ? "inline-block"
-      : "none";
-  });
-}
-
-/* DOWNLOAD TXT */
-function downloadLyrics() {
-  const lyrics = document.getElementById("lyrics").innerText;
-
-  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
-    alert("Please select a song first");
-    return;
-  }
-
-  const blob = new Blob([lyrics], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "church-lyrics.txt";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-/* DOWNLOAD PDF */
-function downloadPDF() {
-  const lyrics = document.getElementById("lyrics").innerText;
-
-  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
-    alert("Please select a song first");
-    return;
-  }
-
-  const win = window.open("", "", "width=800,height=600");
-  win.document.write("<pre style='font-size:16px;font-family:Arial;'>");
-  win.document.write(lyrics.replace(/\n/g, "<br>"));
-  win.document.write("</pre>");
-  win.document.close();
-  win.print();
-}
-
-/* HOME FUNCTION (AUTO) */
-function goHomeAuto() {
-  document.getElementById("lyrics").innerText = "పాటను ఎంచుకోండి 👆";
-  localStorage.removeItem("lastSong");
-
-  const buttons = document.querySelectorAll("#songButtons button");
-  buttons.forEach(btn => btn.style.display = "inline-block");
-}
-
-/* MOBILE / BROWSER BACK */
-window.onpopstate = function () {
-  goHomeAuto();
-};
-
-/* KEYBOARD ESC */
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape") {
-    goHomeAuto();
-    history.pushState(null, "", "#home");
-  }
-});
-
-/* RESTORE LAST SONG ON REFRESH */
-window.onload = function () {
-  const savedLyrics = localStorage.getItem("lastSong");
-  if (savedLyrics) {
-    document.getElementById("lyrics").innerText = savedLyrics;
-  }
-};
-
-
-
-
+      
