@@ -39,12 +39,31 @@ function searchSongs() {
 
 /* ✅ DOWNLOAD TXT (FIXED – TELUGU SAFE) */
 function downloadPDF() {
+function downloadLyrics() {
   const lyrics = document.getElementById("lyrics").innerText;
 
   if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
     alert("ముందుగా పాటను ఎంచుకోండి");
     return;
   }
+
+  // UTF-8 BOM for Telugu support on mobile
+  const bom = "\uFEFF";
+  const blob = new Blob([bom + lyrics], {
+    type: "text/plain;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "shammah-faith-lyrics.txt";
+  document.body.appendChild(a);
+  a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 
   const pdfContent = `
 <!DOCTYPE html>
@@ -79,3 +98,4 @@ ${lyrics.replace(/\n/g, "<br>")}
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
