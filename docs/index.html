@@ -2,20 +2,17 @@
 <html lang="te">
 <head>
   <meta charset="UTF-8">
-  <title>Shammah Faith (SF) – Telugu Christian Song Lyrics</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Shammah Faith Telugu Christian song lyrics website">
-  <meta name="keywords" content="Shammah Faith, SF, Telugu Christian songs, Church lyrics, Jesus songs Telugu">
+  <!-- Google verification (keep it) -->
+  <meta name="google-site-verification" content="lUPSsgc6lHV0x01c--vS10lxpLyAGBt4yEd3G6rapvo" />
 
+  <title>SHAMMAH FAITH</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <!-- HEADER WITH LOGO -->
   <header class="site-header">
-    <img src="logo.png" class="logo" alt="Shammah Faith Logo">
+    <img src="./logo.png" class="logo" alt="Shammah Faith Logo">
     <h1>SHAMMAH FAITH</h1>
     <p>Telugu Christian Song Lyrics</p>
   </header>
@@ -30,37 +27,19 @@
 
   <!-- SONG BUTTONS -->
   <div id="songButtons">
-
-    <button onclick="showSong(1)"
-      data-search="tara velisindi taravel christmas xmas">
-      తార వెలిసింది
-    </button>
-
-    <button onclick="showSong(2)"
-      data-search="yesayya namamulo yesu">
-      యేసయ్య నామములో
-    </button>
-
-    <button onclick="showSong(3)"
-      data-search="prabhuva krupa mercy">
-      ప్రభువా నీ కృప
-    </button>
-
+    <button onclick="showSong(1)" data-search="tara velisindi christmas">తార వెలిసింది</button>
+    <button onclick="showSong(2)" data-search="yesayya namamulo power">యేసయ్య నామములో</button>
+    <button onclick="showSong(3)" data-search="prabhuva krupa">ప్రభువా నీ కృప</button>
   </div>
 
   <!-- LYRICS -->
-  <pre id="lyrics">పాటను ఎంచుకోండి 👆</pre>
+  <div id="lyrics">పాటను ఎంచుకోండి 👆</div>
 
   <!-- DOWNLOAD -->
-  <div class="downloads">
+  <div class="download">
     <button onclick="downloadLyrics()">⬇ Download TXT</button>
     <button onclick="downloadPDF()">⬇ Download PDF</button>
   </div>
-
-  <!-- GOOGLE SHORT FORM HELP (HIDDEN) -->
-  <p style="display:none;">
-    Shammah Faith, ShammahFaith, SF, Telugu Christian Songs, Church Lyrics
-  </p>
 
   <script src="script.js"></script>
 </body>
