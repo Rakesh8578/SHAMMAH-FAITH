@@ -47,10 +47,10 @@ function downloadLyrics() {
     return;
   }
 
-  // UTF-8 BOM is MUST for Telugu on mobile
+  const encoder = new TextEncoder("utf-16le");
   const blob = new Blob(
-    ["\uFEFF" + lyrics],
-    { type: "text/plain;charset=utf-8" }
+    [encoder.encode(lyrics)],
+    { type: "text/plain;charset=utf-16le" }
   );
 
   const a = document.createElement("a");
@@ -99,3 +99,4 @@ ${lyrics}
   a.download = "shammah-faith-lyrics.html";
   a.click();
 }
+
