@@ -55,38 +55,20 @@ function downloadPDF() {
     return;
   }
 
-  const pdfContent = `
-<!DOCTYPE html>
-<html lang="te">
-<head>
-<meta charset="UTF-8">
-<title>Shammah Faith Lyrics</title>
-<style>
-  body {
-    font-family: Noto Sans Telugu, Arial, sans-serif;
-    white-space: pre-wrap;
-    font-size: 16px;
-    padding: 20px;
-  }
-</style>
-</head>
-<body>
-${lyrics.replace(/\n/g, "<br>")}
-</body>
-</html>
-`;
+  // Get jsPDF
+  const { jsPDF } = window.jspdf;
 
-  const blob = new Blob([pdfContent], { type: "application/pdf" });
-  const url = URL.createObjectURL(blob);
+  // Create PDF
+  const doc = new jsPDF("p", "mm", "a4");
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "shammah-faith-lyrics.pdf";
-  document.body.appendChild(a);
-  a.click();
+  doc.setFontSize(14);
 
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  // Split Telugu text properly
+  const lines = doc.splitTextToSize(lyrics, 180);
+  doc.text(lines, 15, 20);
+
+  // Download PDF directly
+  doc.save("shammah-faith-lyrics.pdf");
 }
 
 /* BACK / ESC */
@@ -110,6 +92,7 @@ window.onload = () => {
   if (saved) document.getElementById("lyrics").innerText = saved;
 };
       
+
 
 
 
