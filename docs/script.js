@@ -1,5 +1,4 @@
 const songs = {
-
   1: `తార వెలిసింది ఆ నింగిలో ధరణి మురిసింది
 దూత వచ్చింది సువార్తను మాకు తెలిపింది (2)
 
@@ -32,13 +31,14 @@ function showSong(n) {
 function searchSongs() {
   const val = document.getElementById("searchBox").value.toLowerCase();
   document.querySelectorAll("#songButtons button").forEach(btn => {
-    const text = btn.innerText.toLowerCase() + " " + btn.dataset.search;
+    const text =
+      btn.innerText.toLowerCase() + " " +
+      btn.dataset.search.toLowerCase();
     btn.style.display = text.includes(val) ? "block" : "none";
   });
 }
 
-/* ✅ DOWNLOAD TXT (FIXED – TELUGU SAFE) */
-function downloadPDF() {
+/* ✅ DOWNLOAD TXT – TELUGU SAFE (NO GARBAGE) */
 function downloadLyrics() {
   const lyrics = document.getElementById("lyrics").innerText;
 
@@ -47,55 +47,55 @@ function downloadLyrics() {
     return;
   }
 
-  // UTF-8 BOM for Telugu support on mobile
-  const bom = "\uFEFF";
-  const blob = new Blob([bom + lyrics], {
-    type: "text/plain;charset=utf-8;"
-  });
-
-  const url = URL.createObjectURL(blob);
+  // UTF-8 BOM is MUST for Telugu on mobile
+  const blob = new Blob(
+    ["\uFEFF" + lyrics],
+    { type: "text/plain;charset=utf-8" }
+  );
 
   const a = document.createElement("a");
-  a.href = url;
+  a.href = URL.createObjectURL(blob);
   a.download = "shammah-faith-lyrics.txt";
-  document.body.appendChild(a);
   a.click();
-
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
 }
 
-  const pdfContent = `
+/* ✅ DOWNLOAD PDF (ACTUALLY HTML – TELUGU SAFE) */
+function downloadPDF() {
+  const lyrics = document.getElementById("lyrics").innerText;
+
+  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
+    alert("ముందుగా పాటను ఎంచుకోండి");
+    return;
+  }
+
+  const html = `
 <!DOCTYPE html>
 <html lang="te">
 <head>
 <meta charset="UTF-8">
 <title>Shammah Faith Lyrics</title>
 <style>
-  body {
-    font-family: Noto Sans Telugu, Arial, sans-serif;
-    white-space: pre-wrap;
-    font-size: 16px;
-    padding: 20px;
-  }
+body{
+  font-family: "Noto Sans Telugu", Arial, sans-serif;
+  white-space: pre-wrap;
+  font-size: 18px;
+  padding: 20px;
+}
 </style>
 </head>
 <body>
-${lyrics.replace(/\n/g, "<br>")}
+${lyrics}
 </body>
 </html>
 `;
 
-  const blob = new Blob([pdfContent], { type: "application/pdf" });
-  const url = URL.createObjectURL(blob);
+  const blob = new Blob(
+    [html],
+    { type: "text/html;charset=utf-8" }
+  );
 
   const a = document.createElement("a");
-  a.href = url;
-  a.download = "shammah-faith-lyrics.pdf";
-  document.body.appendChild(a);
+  a.href = URL.createObjectURL(blob);
+  a.download = "shammah-faith-lyrics.html";
   a.click();
-
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
 }
-
