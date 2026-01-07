@@ -32,30 +32,67 @@ function showSong(n) {
 function searchSongs() {
   const val = document.getElementById("searchBox").value.toLowerCase();
   document.querySelectorAll("#songButtons button").forEach(btn => {
-    const text = btn.innerText.toLowerCase() + btn.dataset.search;
+    const text = btn.innerText.toLowerCase() + " " + btn.dataset.search;
     btn.style.display = text.includes(val) ? "block" : "none";
   });
 }
 
-/* REAL PDF DOWNLOAD */
-function downloadPDF() {
-  if (!window.jspdf) {
-    alert("PDF library not loaded");
-    return;
-  }
-
+/* ✅ DOWNLOAD TXT (FIXED – TELUGU SAFE) */
+function downloadLyrics() {
   const lyrics = document.getElementById("lyrics").innerText;
+
   if (!lyrics || lyrics.includes("ఎంచుకోండి")) {
     alert("ముందుగా పాటను ఎంచుకోండి");
     return;
   }
 
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+  const blob = new Blob([lyrics], {
+    type: "text/plain;charset=utf-8"
+  });
 
-  doc.setFontSize(14);
-  const lines = doc.splitTextToSize(lyrics, 180);
-  doc.text(lines, 15, 20);
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "shammah-faith-lyrics.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
 
-  doc.save("shammah-faith-lyrics.pdf");
+/* ✅ DOWNLOAD PDF (NO PRINTER, TELUGU SAFE) */
+function downloadPDF() {
+  const lyrics = document.getElementById("lyrics").innerText;
+
+  if (!lyrics || lyrics.includes("ఎంచుకోండి")) {
+    alert("ముందుగా పాటను ఎంచుకోండి");
+    return;
+  }
+
+  const html = `
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<title>Shammah Faith Lyrics</title>
+<style>
+  body {
+    font-family: "Noto Sans Telugu", Arial, sans-serif;
+    white-space: pre-wrap;
+    font-size: 16px;
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+${lyrics}
+</body>
+</html>
+`;
+
+  const blob = new Blob([html], { type: "application/pdf" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "shammah-faith-lyrics.pdf";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
