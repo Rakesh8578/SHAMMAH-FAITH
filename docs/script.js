@@ -40,7 +40,6 @@ function searchSongs() {
 /* ✅ DOWNLOAD TXT (FIXED – TELUGU SAFE) */
 function downloadLyrics() {
   const lyrics = document.getElementById("lyrics").innerText;
-
   if (!lyrics || lyrics.includes("ఎంచుకోండి")) {
     alert("ముందుగా పాటను ఎంచుకోండి");
     return;
@@ -53,15 +52,11 @@ function downloadLyrics() {
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = "shammah-faith-lyrics.txt";
-  document.body.appendChild(a);
   a.click();
-  document.body.removeChild(a);
 }
 
-/* ✅ DOWNLOAD PDF (NO PRINTER, TELUGU SAFE) */
-function downloadPDF() {
+function downloadHTML() {
   const lyrics = document.getElementById("lyrics").innerText;
-
   if (!lyrics || lyrics.includes("ఎంచుకోండి")) {
     alert("ముందుగా పాటను ఎంచుకోండి");
     return;
@@ -74,12 +69,12 @@ function downloadPDF() {
 <meta charset="UTF-8">
 <title>Shammah Faith Lyrics</title>
 <style>
-  body {
-    font-family: "Noto Sans Telugu", Arial, sans-serif;
-    white-space: pre-wrap;
-    font-size: 16px;
-    padding: 20px;
-  }
+body{
+  font-family: "Noto Sans Telugu", Arial, sans-serif;
+  white-space: pre-wrap;
+  font-size: 18px;
+  padding: 20px;
+}
 </style>
 </head>
 <body>
@@ -88,11 +83,9 @@ ${lyrics}
 </html>
 `;
 
-  const blob = new Blob([html], { type: "application/pdf" });
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "shammah-faith-lyrics.pdf";
-  document.body.appendChild(a);
+  a.download = "shammah-faith-lyrics.html";
   a.click();
-  document.body.removeChild(a);
 }
