@@ -27,32 +27,44 @@ function showSong(n) {
   document.getElementById("lyrics").innerText = songs[n];
 }
 
-/* SEARCH */
+/* SEARCH (TELUGU + ENGLISH) */
 function searchSongs() {
   const val = document.getElementById("searchBox").value.toLowerCase();
   document.querySelectorAll("#songButtons button").forEach(btn => {
     const text =
       btn.innerText.toLowerCase() + " " +
       btn.dataset.search.toLowerCase();
+
     btn.style.display = text.includes(val) ? "block" : "none";
   });
 }
 
-/* ✅ DOWNLOAD TXT – TELUGU SAFE (NO GARBAGE) */
-function downloadPDF() {
+/* ✅ DOWNLOAD TXT (BEST POSSIBLE FOR TELUGU ON MOBILE) */
+function downloadLyrics() {
   const lyrics = document.getElementById("lyrics").innerText;
 
   if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
     alert("ముందుగా పాటను ఎంచుకోండి");
-    return;}
+    return;
+  }
+
+  // UTF-16LE works better on Android than UTF-8
+  const encoder = new TextEncoder("utf-16le");
+  const blob = new Blob(
+    [encoder.encode(lyrics)],
+    { type: "text/plain;charset=utf-16le" }
+  );
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = "shammah-faith-lyrics.txt";
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
 }
 
-/* ✅ DOWNLOAD PDF (ACTUALLY HTML – TELUGU SAFE) */
+/* ✅ DOWNLOAD PDF (HTML – DO NOT CHANGE) */
 function downloadPDF() {
   const lyrics = document.getElementById("lyrics").innerText;
 
@@ -90,7 +102,8 @@ ${lyrics}
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = "shammah-faith-lyrics.html";
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
 }
-
-
