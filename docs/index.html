@@ -1,58 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="te">
 <head>
   <meta charset="UTF-8">
-
-  <!-- Google Search Console Verification -->
-  <meta name="google-site-verification" content="lUPSsgc6lHV0x01c--vS10lxpLyAGBt4yEd3G6rapvo" />
+  <title>Shammah Faith (SF) – Telugu Christian Song Lyrics</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SHAMMAH FAITH – Telugu Christian Song Lyrics</title>
-
-  <!-- SEO -->
-  <meta name="description" content="SHAMMAH FAITH - Telugu Christian song lyrics website. Worship songs, Christmas songs, praise and gospel lyrics.">
-  <meta name="keywords" content="Telugu Christian songs, Telugu church lyrics, Jesus songs Telugu, Christian worship songs">
-  <meta name="author" content="SHAMMAH FAITH">
+  <meta name="description" content="Shammah Faith Telugu Christian song lyrics website">
+  <meta name="keywords" content="Shammah Faith, SF, Telugu Christian songs, Church lyrics, Jesus songs Telugu">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- HEADER -->
+  <!-- HEADER WITH LOGO -->
   <header class="site-header">
-    <img src="logo.jpg" alt="SHAMMAH FAITH Logo" class="logo">
+    <img src="logo.png" class="logo" alt="Shammah Faith Logo">
     <h1>SHAMMAH FAITH</h1>
-    <p class="tagline">Telugu Christian Song Lyrics</p>
+    <p>Telugu Christian Song Lyrics</p>
   </header>
 
   <!-- SEARCH -->
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="పాట పేరు టైప్ చేయండి..." onkeyup="searchSongs()">
-  </div>
+  <input
+    type="text"
+    id="searchBox"
+    placeholder="పాట పేరు టైప్ చేయండి..."
+    onkeyup="searchSongs()"
+  >
 
   <!-- SONG BUTTONS -->
-  <div class="songs" id="songButtons">
-    <button onclick="showSong(1)" data-search="తార వెలిసింది christmas">తార వెలిసింది</button>
-    <button onclick="showSong(2)" data-search="యేసయ్య నామము yesayya">యేసయ్య నామము</button>
-    <button onclick="showSong(3)" data-search="ప్రభువా కృప prabhuva krupa">ప్రభువా కృప</button>
-  </div>
+  <div id="songButtons">
 
-  <!-- BACK BUTTON -->
-  <button id="backBtn" onclick="goHome()" style="display:none;">⬅ Back</button>
+    <button onclick="showSong(1)"
+      data-search="tara velisindi taravel christmas xmas">
+      తార వెలిసింది
+    </button>
+
+    <button onclick="showSong(2)"
+      data-search="yesayya namamulo yesu">
+      యేసయ్య నామములో
+    </button>
+
+    <button onclick="showSong(3)"
+      data-search="prabhuva krupa mercy">
+      ప్రభువా నీ కృప
+    </button>
+
+  </div>
 
   <!-- LYRICS -->
-  <pre id="lyrics" style="display:none;"></pre>
+  <pre id="lyrics">పాటను ఎంచుకోండి 👆</pre>
 
   <!-- DOWNLOAD -->
-  <div class="download-buttons" style="display:none;" id="downloadBtns">
-    <button onclick="downloadTXT()">Download TXT</button>
+  <div class="downloads">
+    <button onclick="downloadLyrics()">⬇ Download TXT</button>
+    <button onclick="downloadPDF()">⬇ Download PDF</button>
   </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 SHAMMAH FAITH | For worship & educational purpose</p>
-  </footer>
+  <!-- GOOGLE SHORT FORM HELP (HIDDEN) -->
+  <p style="display:none;">
+    Shammah Faith, ShammahFaith, SF, Telugu Christian Songs, Church Lyrics
+  </p>
 
   <script src="script.js"></script>
 </body>
