@@ -47,7 +47,7 @@ function searchSongs() {
 }
 
 /* DOWNLOAD TXT */
-function downloadLyrics() {
+function downloadPDF() {
   const lyrics = document.getElementById("lyrics").innerText;
 
   if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
@@ -55,17 +55,33 @@ function downloadLyrics() {
     return;
   }
 
-  // UTF-8 BOM (fix Telugu text issue on mobile)
-  const bom = "\uFEFF";
-  const blob = new Blob([bom + lyrics], {
-    type: "text/plain;charset=utf-8"
-  });
+  const pdfContent = `
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<title>Shammah Faith Lyrics</title>
+<style>
+  body {
+    font-family: Noto Sans Telugu, Arial, sans-serif;
+    white-space: pre-wrap;
+    font-size: 16px;
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+${lyrics.replace(/\n/g, "<br>")}
+</body>
+</html>
+`;
 
+  const blob = new Blob([pdfContent], { type: "application/pdf" });
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = "shammah-faith-lyrics.txt";
+  a.download = "shammah-faith-lyrics.pdf";
   document.body.appendChild(a);
   a.click();
 
@@ -94,5 +110,6 @@ window.onload = () => {
   if (saved) document.getElementById("lyrics").innerText = saved;
 };
       
+
 
 
