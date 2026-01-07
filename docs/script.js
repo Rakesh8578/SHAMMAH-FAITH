@@ -41,34 +41,8 @@ function searchSongs() {
 }
 
 /* ================= DOWNLOAD TXT ================= */
-/* BEST POSSIBLE ON ANDROID */
 
-function downloadLyrics() {
-  const lyrics = document.getElementById("lyrics").innerText;
-
-  if (!lyrics || lyrics.includes("ఎంచుకోండి")) {
-    alert("ముందుగా పాటను ఎంచుకోండి");
-    return;
-  }
-
-  const encoder = new TextEncoder("utf-16le");
-  const blob = new Blob(
-    [encoder.encode(lyrics)],
-    { type: "text/plain;charset=utf-16le" }
-  );
-
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "shammah-faith-lyrics.txt";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
-
-/* ================= DOWNLOAD PDF ================= */
-/* ACTUALLY HTML – TELUGU SAFE */
-
-function downloadPDF() {
+function downloadDOC() {
   const lyrics = document.getElementById("lyrics").innerText;
 
   if (!lyrics || lyrics.includes("ఎంచుకోండి")) {
@@ -77,17 +51,17 @@ function downloadPDF() {
   }
 
   const html = `
-<!DOCTYPE html>
-<html lang="te">
+<html xmlns:o='urn:schemas-microsoft-com:office:office'
+      xmlns:w='urn:schemas-microsoft-com:office:word'
+      xmlns='http://www.w3.org/TR/REC-html40'>
 <head>
 <meta charset="UTF-8">
 <title>Shammah Faith Lyrics</title>
 <style>
 body {
-  font-family: "Noto Sans Telugu", Arial, sans-serif;
+  font-family: 'Noto Sans Telugu', Arial, sans-serif;
   white-space: pre-wrap;
   font-size: 18px;
-  padding: 20px;
 }
 </style>
 </head>
@@ -97,15 +71,9 @@ ${lyrics}
 </html>
 `;
 
-  const blob = new Blob(
-    [html],
-    { type: "text/html;charset=utf-8" }
-  );
-
+  const blob = new Blob([html], { type: "application/msword;charset=utf-8" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "shammah-faith-lyrics.html";
-  document.body.appendChild(a);
+  a.download = "shammah-faith-lyrics.doc";
   a.click();
-  document.body.removeChild(a);
 }
