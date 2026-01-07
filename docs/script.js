@@ -14,17 +14,7 @@ const songs = {
 సంతోషమే ఇక సంబరమే
 లోక రక్షణ ఆనందమే
 స్తోత్రార్పణే మా రారాజుకే
-ఇది క్రిస్మస్ ఆర్భాటమే         ||తార||
-
-బంగారమును సాంబ్రాణియు
-బోళంబును తెచ్చాములే
-ఆ యింటిలో మా కంటితో
-నిను కనులారా గాంచాములే (2)
-
-మా ఇమ్మానుయేలువు నీవేనని
-నిను మనసారా కొలిచాములే
-మా యూదుల రాజువు నీవేనని
-నిను ఘనపరచి పొగిడాములే        ||తార||`,
+ఇది క్రిస్మస్ ఆర్భాటమే         ||తార||`,
 
   2: `యేసయ్య నామములో శక్తి ఉంది
 యేసయ్య ప్రేమలో రక్షణ ఉంది`,
@@ -35,6 +25,69 @@ const songs = {
 
 /* SHOW SONG */
 function showSong(number) {
+  document.getElementById("lyrics").innerText = songs[number];
+  history.pushState({ page: "song" }, "", "#song");
+  localStorage.setItem("lastSong", number);
+}
+
+/* SEARCH (TELUGU + ENGLISH SHORT FORM) */
+function searchSongs() {
+  const input = document.getElementById("searchBox").value.toLowerCase();
+  const buttons = document.querySelectorAll("#songButtons button");
+
+  buttons.forEach(button => {
+    const text =
+      button.innerText.toLowerCase() + " " +
+      button.getAttribute("data-search").toLowerCase();
+
+    button.style.display = text.includes(input)
+      ? "inline-block"
+      : "none";
+  });
+}
+
+/* DOWNLOAD TXT */
+function downloadLyrics() {
+  const lyrics = document.getElementById("lyrics").innerText;
+  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) return;
+
+  const blob = new Blob([lyrics], { type: "text/plain;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "church-lyrics.txt";
+  a.click();
+}
+
+/* DOWNLOAD PDF */
+function downloadPDF() {
+  const lyrics = document.getElementById("lyrics").innerText;
+  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) return;
+
+  const win = window.open("", "", "width=800,height=600");
+  win.document.write("<pre>");
+  win.document.write(lyrics.replace(/\n/g, "<br>"));
+  win.document.write("</pre>");
+  win.document.close();
+  win.print();
+}
+
+/* BACK + ESC */
+function goHomeAuto() {
+  document.getElementById("lyrics").innerText = "పాటను ఎంచుకోండి 👆";
+  localStorage.removeItem("lastSong");
+}
+
+window.onpopstate = goHomeAuto;
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") goHomeAuto();
+});
+
+/* RESTORE LAST SONG */
+window.onload = () => {
+  const last = localStorage.getItem("lastSong");
+  if (last) showSong(last);
+};function showSong(number) {
   const lyricsText = songs[number];
   document.getElementById("lyrics").innerText = lyricsText;
 
@@ -335,6 +388,7 @@ window.onload = function () {
     document.getElementById("lyrics").innerText = savedLyrics;
   }
 };
+
 
 
 
