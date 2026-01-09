@@ -72,7 +72,7 @@ const songs = {
 function showSong(n) {
   const lyricsBox =
   document.getElementById("lyrics");
-  lyricsBox.textContext = songs [n];    // ✅ NOT innerText
+  lyricsBox.textContent = songs [n];    // ✅ NOT innerText
   
 }
 
@@ -241,6 +241,7 @@ ${lyrics}
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
 
 
 
