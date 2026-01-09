@@ -22,10 +22,9 @@ body {
   font-size: 16px;
 }
 
-#songButtons button,
-.download button {
+#songButtons button {
   display: block;
-  width: 80%;
+  width: 90%;
   margin: 10px auto;
   padding: 12px;
   background: #2e7d32;
@@ -35,22 +34,45 @@ body {
   font-size: 16px;
 }
 
-#lyrics {
-  white-space: pre-wrap;     /* keeps full Telugu lines */
-  word-wrap: break-word;
-  background: #ffffff;
-  padding: 15px;
-  margin: 15px;
+.download button {
+  display: block;
+  width: 90%;
+  margin: 12px auto;
+  padding: 12px;
+  background: #2e7d32;
+  color: white;
+  border: none;
   border-radius: 6px;
-  font-size: 18px;
-  line-height: 1.7;
+  font-size: 16px;
+}
 
-  /* 🔥 THESE FIX THE CUTTING PROBLEM */
+
+#lyrics {
+  display: block;
+
+  white-space: pre-wrap;
+  word-break: break-word;
+
+  background: #ffffff;
+  color: #000000;
+
+  padding: 20px;
+  margin: 20px;
+
+  border-radius: 8px;
+
+  font-size: 18px;
+  line-height: 1.8;
+
+  /* 🔥 CRITICAL FIXES */
+  position: relative;
   max-height: none;
   height: auto;
   overflow: visible;
   opacity: 1;
+  clear: both;
 }
+
 
 
 
