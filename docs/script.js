@@ -35,7 +35,10 @@ const songs = {
 /* ================= SHOW SONG ================= */
 
 function showSong(n) {
-  document.getElementById("lyrics").innerText = songs [n];
+  const lyricsBox =
+  document.getElementById("lyrics");
+  lyricsBox.textContext = songs [n];    // ✅ NOT innerText
+  
 }
 
 /* ================= SEARCH ================= */
@@ -203,6 +206,7 @@ ${lyrics}
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
 
 
 
