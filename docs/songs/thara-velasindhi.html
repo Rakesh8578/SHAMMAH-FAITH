@@ -106,16 +106,24 @@ ${getLyrics()}
 }
 
 /* share */
+<script>
 function shareSong() {
-  const titel =
-    "తార వెలిసింది - Telugu christian song Lyrics";
-  const url =  window.location.herf;
-  const text = titel + "\n\n" + url;
-  
-   window.open( "https://wa.me/?text=" +
-    encodeURLComponent(text), "_blank");
+  const title = "తార వెలిసింది – Telugu Christian Song Lyrics";
+  const url = window.location.href;
+  const text = title + "\n\n" + url;
+
+  // Universal WhatsApp share (mobile + desktop)
+  const shareURL =
+    "https://api.whatsapp.com/send?text=" +
+    encodeURIComponent(text);
+
+  window.open(shareURL, "_blank");
 }
-  
+  </script>
+
+
+
+  <script>
 function downloadFile(content, filename, type) {
   const blob = new Blob([content], { type });
   const url = URL.createObjectURL(blob);
