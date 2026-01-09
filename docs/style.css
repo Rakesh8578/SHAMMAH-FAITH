@@ -36,9 +36,15 @@ body {
 }
 
 #lyrics {
-  background: white;
-  margin: 15px;
+  white-space: pre-wrap;   /* keeps full lyrics */
+  word-wrap: break-word;
+  max-height: none;        /* NO LIMIT */
+  overflow: visible;       /* allow full text */
+  background: #ffffff;
   padding: 15px;
-  white-space: pre-line;
+  margin: 15px;
   border-radius: 6px;
+  font-size: 18px;
+  line-height: 1.6;
 }
+
