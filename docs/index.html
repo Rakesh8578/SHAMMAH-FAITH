@@ -27,11 +27,12 @@
   >
 
   <!-- SONG BUTTONS -->
+  <div id="songButtons">
   <button 
     onclick= "opensong('thara-velasindhi.html')">
     తార వెలిసింది
   </button>
-  </a>
+  </div>
     <button onclick="showSong(2)" data-search="prabhuva krupa">ప్రభువా నీ కృప</button></a>
     <button onclick="showSong(3)" data-search="ninene nammukunnanaya">నిన్నే నిన్నే నమ్ముకున్నానయ్య</button></a>
   </div>
@@ -45,9 +46,16 @@ function searchSongs() {
   });
 }
 
+  <script>
+    function opensong(page)  {
+      window.loccation.href = "songs/" + page;
+    }
+    </script>
+  
  <script scr = "script.js"></script>
 </body>
 </html>
+
 
 
 
