@@ -88,43 +88,38 @@ a {
 </div>
 
 <script>
-function getLyrics() {
-  return document.getElementById("lyrics").innerText;
+/* ================= SHARE ================= */
+function shareSong() {
+  const text =
+    "తార వెలిసింది – Telugu Christian Song Lyrics\n\n" +
+    window.location.href;
+
+  const url =
+    "https://api.whatsapp.com/send?text=" +
+    encodeURIComponent(text);
+
+  window.open(url, "_blank");
 }
 
-/* PDF (HTML-based – Telugu safe) */
+/* ================= DOWNLOAD PDF ================= */
 function downloadPDF() {
+  const lyrics = document.getElementById("lyrics").innerText;
+
   const html = `
 <!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"></head>
 <body style="font-family:Noto Sans Telugu,Arial; white-space:pre-wrap;">
-${getLyrics()}
+${lyrics}
 </body>
 </html>`;
-  downloadFile(html, "thara-velasindhi.html", "text/html;charset=utf-8");
+
+  downloadFile(html, "thara-velasindhi.html", "text/html");
 }
 
-/* share */
-<script>
-function shareSong() {
-  const title = "తార వెలిసింది – Telugu Christian Song Lyrics";
-  const url = window.location.href;
-  const text = title + "\n\n" + url;
-
-  // Universal WhatsApp share (mobile + desktop)
-  const shareURL =
-    "https://api.whatsapp.com/send?text=" +
-    encodeURIComponent(text);
-
-  window.open(shareURL, "_blank");
-}
-
-
-
-  
+/* ================= DOWNLOAD HELPER ================= */
 function downloadFile(content, filename, type) {
-  const blob = new Blob([content], { type });
+  const blob = new Blob([content], { type: type });
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
@@ -137,6 +132,3 @@ function downloadFile(content, filename, type) {
   URL.revokeObjectURL(url);
 }
 </script>
-
-</body>
-</html>
