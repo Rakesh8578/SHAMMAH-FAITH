@@ -15,12 +15,20 @@ const songs = {
 సంతోషమే ఇక సంబరమే
 లోక రక్షణ ఆనందమే
 స్తోత్రార్పణే మా రారాజుకే
-ఇది క్రిస్మస్ ఆర్భాటమే         ||తార||`,
+ఇది క్రిస్మస్ ఆర్భాటమే         ||తార||
 
-  2: `యేసయ్య నామములో శక్తి ఉంది
-యేసయ్య ప్రేమలో రక్షణ ఉంది`,
+బంగారమును సాంబ్రాణియు
+బోళంబును తెచ్చాములే
+ఆ యింటిలో మా కంటితో
+నిను కనులారా గాంచాములే (2)
 
-  3: `ప్రభువా నీ కృప అపారం
+మా ఇమ్మానుయేలువు నీవేనని
+నిను మనసారా కొలిచాములే
+మా యూదుల రాజువు నీవేనని
+నిను ఘనపరచి పొగిడాములే        ||తార||`,
+
+
+  2: `ప్రభువా నీ కృప అపారం
 నీ ప్రేమ శాశ్వతం`
 };
 
@@ -41,6 +49,7 @@ function searchSongs() {
 }
 
 /* ================= DOWNLOAD TXT ================= */
+
 function downloadPDF() {
   const lyrics = document.getElementById("lyrics").innerText;
 
@@ -49,22 +58,43 @@ function downloadPDF() {
     return;
   }
 
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({
-    orientation: "p",
-    unit: "mm",
-    format: "a4"
-  });
-
-  doc.setFont("Times", "normal");
-  doc.setFontSize(14);
-
-  const lines = doc.splitTextToSize(lyrics, 180);
-  doc.text(lines, 15, 20);
-
-  doc.save("shammah-faith-lyrics.pdf");
+  const html = `
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<title>Shammah Faith Lyrics</title>
+<style>
+body {
+  font-family: "Noto Sans Telugu", Arial, sans-serif;
+  white-space: pre-wrap;
+  font-size: 18px;
+  padding: 20px;
 }
+h1 {
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<h1>SHAMMAH FAITH</h1>
+${lyrics}
+</body>
+</html>
+`;
 
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "shammah-faith-lyrics.html";
+  document.body.appendChild(a);
+  a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 
 
 function downloadDOC() {
@@ -139,4 +169,5 @@ ${lyrics}
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
 
