@@ -41,6 +41,31 @@ function searchSongs() {
 }
 
 /* ================= DOWNLOAD TXT ================= */
+function downloadPDF() {
+  const lyrics = document.getElementById("lyrics").innerText;
+
+  if (!lyrics || lyrics.includes("పాటను ఎంచుకోండి")) {
+    alert("ముందుగా పాటను ఎంచుకోండి");
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({
+    orientation: "p",
+    unit: "mm",
+    format: "a4"
+  });
+
+  doc.setFont("Times", "normal");
+  doc.setFontSize(14);
+
+  const lines = doc.splitTextToSize(lyrics, 180);
+  doc.text(lines, 15, 20);
+
+  doc.save("shammah-faith-lyrics.pdf");
+}
+
+
 
 function downloadDOC() {
   const lyrics = document.getElementById("lyrics").innerText;
