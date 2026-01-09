@@ -36,19 +36,21 @@ body {
 }
 
 #lyrics {
-  white-space: pre-wrap;   /* keeps full lyrics */
+  white-space: pre-wrap;     /* keeps full Telugu lines */
   word-wrap: break-word;
-  max-height: none;        /* NO LIMIT */
-  overflow: visible;       /* allow full text */
   background: #ffffff;
   padding: 15px;
   margin: 15px;
   border-radius: 6px;
   font-size: 18px;
-  line-height: 1.6;
-  font-family: "Noto Sans Telugu",
-system-ui, Arial, sans-serif;
-   text-align: center;
+  line-height: 1.7;
+
+  /* 🔥 THESE FIX THE CUTTING PROBLEM */
+  max-height: none;
+  height: auto;
+  overflow: visible;
+  opacity: 1;
 }
+
 
 
