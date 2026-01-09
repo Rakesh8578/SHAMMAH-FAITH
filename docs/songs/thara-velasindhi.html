@@ -94,7 +94,7 @@ function getLyrics() {
 
 /* PDF (HTML-based – Telugu safe) */
 function downloadPDF() {
-  const content = `
+  const html = `
 <!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"></head>
@@ -102,16 +102,18 @@ function downloadPDF() {
 ${getLyrics()}
 </body>
 </html>`;
-  downloadFile(content, "thara-velasindhi.html", "text/html;charset=utf-8");
+  downloadFile(html, "thara-velasindhi.html", "text/html;charset=utf-8");
 }
 
 /* share */
 function shareSong() {
-  const text=
-    "తార వెలిసింది - Telugu christian song Lyrics\n\n + window.location.herf;
-    const url = "https://wa.me/?text=" +
-    encodeURLComponent(text);
-window.open(whatsappURL, "_blank");
+  const titel =
+    "తార వెలిసింది - Telugu christian song Lyrics";
+  const url =  window.location.herf;
+  const text = titel + "\n\n" + url;
+  
+   window.open( "https://wa.me/?text=" +
+    encodeURLComponent(text), "_blank");
 }
   
 function downloadFile(content, filename, type) {
