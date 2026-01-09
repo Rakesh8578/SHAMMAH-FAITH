@@ -1,115 +1,118 @@
 <!DOCTYPE html>
 <html lang="te">
 <head>
-  <meta charset="UTF-8">
-  <title>తార వెలిసింది – SHAMMAH FAITH</title>
+<meta charset="UTF-8">
+<title>తార వెలిసింది – SHAMMAH FAITH</title>
 
-  <style>
-    body {
-      font-family: "Noto Sans Telugu", Arial, sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 20px;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 6px;
-    }
-    h1 {
-      text-align: center;
-      color: #2e7d32;
-    }
-    pre {
-      white-space: pre-wrap;
-      font-size: 18px;
-      line-height: 1.6;
-    }
-    a {
-      display: inline-block;
-      margin-bottom: 15px;
-      text-decoration: none;
-      color: #2e7d32;
-      font-weight: bold;
-    }
-  </style>
+<style>
+body {
+  font-family: "Noto Sans Telugu", Arial, sans-serif;
+  background: #f5f5f5;
+  padding: 20px;
+}
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 6px;
+}
+h1 {
+  text-align: center;
+  color: #2e7d32;
+}
+pre {
+  white-space: pre-wrap;
+  font-size: 18px;
+  line-height: 1.6;
+}
+button {
+  padding: 10px 15px;
+  margin: 6px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+a {
+  display: inline-block;
+  margin-bottom: 15px;
+  color: #2e7d32;
+  font-weight: bold;
+  text-decoration: none;
+}
+</style>
 </head>
 
 <body>
-  <div class="container">
 
-    <a href="../index.html">⬅ Back to Home</a>
+<div class="container">
 
-    <h1>తార వెలిసింది</h1>
+<a href="../index.html">⬅ Back to Home</a>
 
-    <pre>
+<h1>తార వెలిసింది</h1>
+
+<pre id="lyrics">
 తార వెలిసింది ఆ నింగిలో ధరణి మురిసింది
 దూత వచ్చింది సువార్తను మాకు తెలిపింది (2)
 
 రాజులకు రాజు పుట్టాడని
-యూదుల రాజు ఉదయించాడని (2)         ||తార||
+యూదుల రాజు ఉదయించాడని (2)
 
 మందను విడచి మమ్మును మరచి
 మేమంతా కలిసి వెళ్ళాములే
 ఆ ఊరిలో ఆ పాకలో
 స్తుతి గానాలు పాడాములే (2)
-
-సంతోషమే ఇక సంబరమే
-లోక రక్షణ ఆనందమే
-స్తోత్రార్పణే మా రారాజుకే
-ఇది క్రిస్మస్ ఆర్భాటమే         ||తార||
-
-బంగారమును సాంబ్రాణియు
-బోళంబును తెచ్చాములే
-ఆ యింటిలో మా కంటితో
-నిను కనులారా గాంచాములే (2)
-
-మా ఇమ్మానుయేలువు నీవేనని
-నిను మనసారా కొలిచాములే
-మా యూదుల రాజువు నీవేనని
-నిను ఘనపరచి పొగిడాములే        ||తార||
-    </pre>
-
+</pre>
 
 <!-- DOWNLOAD BUTTONS -->
 <button onclick="downloadPDF()">⬇ Download PDF</button>
 <button onclick="downloadWord()">⬇ Download Word</button>
-    
+
+</div>
+
 <script>
 function getLyrics() {
   return document.getElementById("lyrics").innerText;
 }
 
+/* PDF (HTML-based – Telugu safe) */
 function downloadPDF() {
-  download(`
-  <html><body style="font-family:Noto Sans Telugu; white-space:pre-wrap;">
-  ${getLyrics()}
-  </body></html>`,
-  "thara-velasindhi.html",
-  "text/html"
-  );
+  const content = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family:Noto Sans Telugu,Arial; white-space:pre-wrap;">
+${getLyrics()}
+</body>
+</html>`;
+  downloadFile(content, "thara-velasindhi.html", "text/html;charset=utf-8");
 }
 
-function downloadWord() {
-  download(`
-  <html><body style="font-family:Noto Sans Telugu; white-space:pre-wrap;">
-  ${getLyrics()}
-  </body></html>`,
-  "thara-velasindhi.doc",
-  "application/msword"
-  );
+/* share */
+function shareSong() {
+  const text=
+    "తార వెలిసింది - Telugu christian song Lyrics\n\n + window.location.herf;
+    const url = "https://wa.me/?text=" +
+    encodeURLComponent(text);
+window.open(whatsappURL, "_blank");
 }
+  
+function downloadFile(content, filename, type) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
 
-function download(content, name, type) {
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(new Blob([content], { type }));
-  a.download = name;
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
   a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
-  
 </script>
-  
+
 </body>
 </html>
