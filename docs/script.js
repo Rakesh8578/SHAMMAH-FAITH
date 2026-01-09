@@ -35,7 +35,7 @@ const songs = {
 /* ================= SHOW SONG ================= */
 
 function showSong(n) {
-  document.getElementById("lyrics").innerText = songs.lyrics;
+  document.getElementById("lyrics").innerText = songs [n];
 }
 
 /* ================= SEARCH ================= */
@@ -203,6 +203,7 @@ ${lyrics}
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
 
 
 
