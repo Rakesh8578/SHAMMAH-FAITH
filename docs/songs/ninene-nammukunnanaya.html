@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<title>నిన్నే నిన్నే నమ్ముకున్నానయ్య</title>
+
+<style>
+body{
+  font-family:"Noto Sans Telugu", Arial;
+  background:#f5f5f5;
+  padding:20px;
+}
+.container{
+  max-width:800px;
+  margin:auto;
+  background:#fff;
+  padding:20px;
+  border-radius:6px;
+}
+h1{ text-align:center; color:#2e7d32; }
+pre{ white-space:pre-wrap; font-size:18px; line-height:1.6; }
+button{
+  padding:10px 14px;
+  margin:6px;
+  background:#2e7d32;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+a{ color:#2e7d32; font-weight:bold; text-decoration:none; }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<a href="../index.html">⬅ Back to Home</a>
+
+<h1 id="songTitle">నిన్నే నిన్నే నమ్ముకున్నానయ్య</h1>
+
+<pre id="lyrics">
+నిన్నే నిన్నే నమ్ముకున్నానయ్య
+నన్ను నన్ను వీడిపోబోకయ్యా (2)
+నువ్వు లేక నేను బ్రతుకలేనయ్య
+నీవుంటే నాకు చాలు యేసయ్య (2)           ||నిన్నే||
+
+కన్నుల్లో కన్నీళ్లు గూడు కట్టినా
+కన్నవారే కాదని నన్ను నెట్టినా (2)
+కారు చీకటులే నన్ను కమ్మినా
+కఠినాత్ములెందరో నన్ను కొట్టినా (2)
+కఠినాత్ములెందరో నన్ను కొట్టినా            ||నిన్నే||
+
+చేయని నేరములంటకట్టినా
+చేతకాని వాడనని చీదరించినా (2)
+చీకు చింతలు నన్ను చుట్టినా
+చెలిమే చితికి నన్ను చేర్చినా (2)
+చెలిమే చితికి నన్ను చేర్చినా                 ||నిన్నే||
+</pre>
+
+<button onclick="downloadPDF()">⬇ Download PDF</button>
+<button onclick="shareSong()">📤 Share</button>
+
+<!-- ✅ SCRIPT MUST BE HERE (BOTTOM) -->
+<script>
+function downloadPDF() {
+  const title = document.getElementById("songTitle").innerText;
+  const lyrics = document.getElementById("lyrics").innerText;
+
+  const html =
+    "<html><body style='font-family:Noto Sans Telugu;white-space:pre-wrap;'>" +
+    "<h1>" + title + "</h1>" +
+    "<pre>" + lyrics + "</pre>" +
+    "</body></html>";
+
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = title + ".html";
+  a.click();
+}
+
+function shareSong() {
+  const title = document.getElementById("songTitle").innerText;
+  const url = window.location.href;
+
+  const shareUrl =
+    "https://api.whatsapp.com/send?text=" +
+    encodeURIComponent(title + "\n\n" + url);
+
+  window.open(shareUrl, "_blank");
+}
+</script>
+
+</body>
+</html>
