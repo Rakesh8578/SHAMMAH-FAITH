@@ -32,13 +32,15 @@
     onclick= "openSong('thara-velasindhi.html')">
     తార వెలిసింది
   </button>
-    <button onclick="showSong(2)" data-search="prabhuva krupa">ప్రభువా నీ కృప</button></a>
-    <button onclick="showSong(3)" data-search="ninene nammukunnanaya">నిన్నే నిన్నే నమ్ముకున్నానయ్య</button></a>
+    <button onclick="openSong('prabhuva-nee-krupa.html')">
+     ప్రభువా నీ కృప</button>
+    <button onclick="openSong('ninene-nammukunnanaya.html')">
+     నిన్నే నిన్నే నమ్ముకున్నానయ్య</button>
   </div>
 
 <script>
   function openSong(page) {
-  window.location.href = "songs/" + page;
+  window.location.href = "songs/" + page;}
 
     
 function searchSongs() {
@@ -56,6 +58,7 @@ function searchSongs() {
  <script scr = "script.js"></script>
 </body>
 </html>
+
 
 
 
