@@ -67,20 +67,17 @@ a{ color:#2e7d32; font-weight:bold; text-decoration:none; }
 నిను ఘనపరచి పొగిడాములే        ||తార||
 </pre>
 
-<!-- 🔽 BUTTONS AT END -->
 <div style="margin-top:20px;">
   <button onclick="downloadPDF()">📄 Download PDF</button>
   <button onclick="shareSong()">📤 Share</button>
 </div>
 
-<!-- jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-/* ========= DOWNLOAD REAL PDF ========= */
 async function downloadPDF() {
   const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF("p", "mm", "a4");
+  const pdf = new jsPDF();
 
   const fontUrl = "../font/NotoSansTelugu-Regular.ttf";
   const fontData = await fetch(fontUrl).then(r => r.arrayBuffer());
@@ -102,25 +99,17 @@ async function downloadPDF() {
   pdf.save(title + ".pdf");
 }
 
-/* ========= SHARE SONG ========= */
 function shareSong() {
   const title = document.getElementById("song-title").innerText;
   const url = window.location.href;
-  const text = `${title}\n\n${url}`;
 
-  // Mobile devices
   if (navigator.share) {
-    navigator.share({
-      title: title,
-      text: title,
-      url: url
-    });
-  } 
-  // Desktop fallback (WhatsApp Web)
-  else {
-    const whatsappUrl =
-      "https://wa.me/?text=" + encodeURIComponent(text);
-    window.open(whatsappUrl, "_blank");
+    navigator.share({ title, url });
+  } else {
+    window.open(
+      "https://wa.me/?text=" + encodeURIComponent(title + "\n" + url),
+      "_blank"
+    );
   }
 }
 </script>
