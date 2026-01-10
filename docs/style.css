@@ -1,1 +1,118 @@
+body {
+  margin: 0;
+  font-family: Arial, "Noto Sans Telugu";
+  background: #f5f5f5;
+}
 
+/* HEADER */
+.site-header {
+  background: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  pasition:  relative;
+  z-index: 1;
+
+  
+}
+
+.site-header img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* MAIN CONTENT */
+.main-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 15px;
+}
+
+/* SEARCH */
+#searchBox {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+/* SONG BUTTONS */
+#songButtons button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#songButtons button:hover {
+  opacity: 0.9;
+}
+
+/* LYRICS */
+#lyrics {
+  white-space: pre-wrap;
+  background: white;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+/* DOWNLOAD */
+.download button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+#songButtons {
+  margin-top: 20px;
+}
+
+#songButtons button {
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+/* MOBILE FIX */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  pre {
+    font-size: 16px;
+  }
+
+  button {
+    width: 100%;
+    margin: 6px 0;
+  }
+}
