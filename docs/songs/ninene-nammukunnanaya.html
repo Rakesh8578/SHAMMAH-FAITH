@@ -1,51 +1,15 @@
 <!DOCTYPE html>
 <html lang="te">
 <head>
-  <meta name="description"
-content="నిన్నే నిన్నే నమ్ముకున్నానయ్య Telugu Christian song lyrics from SHAMMAH FAITH">
-
-<meta name="keywords"
-content="నిన్నే నిన్నే నమ్ముకున్నానయ్య, Telugu Christian Songs, Jesus Songs Telugu, Shammah Faith">
-
-  
 <meta charset="UTF-8">
 <title>నిన్నే నిన్నే నమ్ముకున్నానయ్య</title>
-
-<style>
-body{
-  font-family:"Noto Sans Telugu", Arial;
-  background:#f5f5f5;
-  padding:20px;
-}
-.container{
-  max-width:800px;
-  margin:auto;
-  background:#fff;
-  padding:20px;
-  border-radius:6px;
-}
-h1{ text-align:center; color:#2e7d32; }
-pre{ white-space:pre-wrap; font-size:18px; line-height:1.6; }
-button{
-  padding:10px 14px;
-  margin:6px;
-  background:#2e7d32;
-  color:#fff;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-}
-a{ color:#2e7d32; font-weight:bold; text-decoration:none; }
-</style>
 </head>
 
-<body>
-<div class="container">
+<body style="font-family:Noto Sans Telugu, Arial; padding:20px;">
 
 <a href="../index.html">⬅ Back to Home</a>
 
 <h1 id="songTitle">నిన్నే నిన్నే నమ్ముకున్నానయ్య</h1>
-
 
 <pre id="lyrics">
 నిన్నే నిన్నే నమ్ముకున్నానయ్య
@@ -69,55 +33,34 @@ a{ color:#2e7d32; font-weight:bold; text-decoration:none; }
 <button onclick="downloadPDF()">⬇ Download PDF</button>
 <button onclick="shareSong()">📤 Share</button>
 
+<!-- ✅ SCRIPT MUST BE HERE (BOTTOM) -->
 <script>
-function downloadPDF(){
+function downloadPDF() {
   const title = document.getElementById("songTitle").innerText;
   const lyrics = document.getElementById("lyrics").innerText;
 
-  const html = `
-  <html>
-  <head>
-    <meta charset="UTF-8">
-    <style>
-      body{
-        font-family:"Noto Sans Telugu", Arial;
-        padding:30px;
-      }
-      h1{
-        text-align:center;
-        color:#2e7d32;
-      }
-      pre{
-        white-space:pre-wrap;
-        font-size:18px;
-        line-height:1.6;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>${title}</h1>
-    <pre>${lyrics}</pre>
-  </body>
-  </html>`;
+  const html =
+    "<html><body style='font-family:Noto Sans Telugu;white-space:pre-wrap;'>" +
+    "<h1>" + title + "</h1>" +
+    "<pre>" + lyrics + "</pre>" +
+    "</body></html>";
 
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(
-    new Blob([html], { type: "application/pdf" })
-  );
-  a.download = title + ".pdf";
+  a.href = URL.createObjectURL(blob);
+  a.download = title + ".html";
   a.click();
+}
 
-  function shareSong() {
+function shareSong() {
   const title = document.getElementById("songTitle").innerText;
   const url = window.location.href;
 
-  const text = `${title} – Telugu Christian Song Lyrics\n\n${url}`;
-
-  const whatsappUrl =
+  const shareUrl =
     "https://api.whatsapp.com/send?text=" +
-    encodeURIComponent(text);
+    encodeURIComponent(title + "\n\n" + url);
 
-  window.open(whatsappUrl, "_blank");
+  window.open(shareUrl, "_blank");
 }
 </script>
 
