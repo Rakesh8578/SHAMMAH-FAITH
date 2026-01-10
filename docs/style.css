@@ -13,7 +13,9 @@ body {
 }
 
 .site-header img {
-  height: 60px;
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
 }
 
 /* MAIN CONTENT */
@@ -70,4 +72,19 @@ body {
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+#songButtons {
+  margin-top: 20px;
+}
+
+#songButtons button {
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
 }
