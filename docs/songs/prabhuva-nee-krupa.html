@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<title>ప్రభువా నీ కృప – SHAMMAH FAITH</title>
 
+<style>
+body {
+  font-family: "Noto Sans Telugu", Arial;
+  background: #f5f5f5;
+  padding: 20px;
+}
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+}
+pre {
+  white-space: pre-wrap;
+  font-size: 18px;
+  line-height: 1.6;
+}
+button {
+  padding: 10px;
+  margin: 5px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+a {
+  color: #2e7d32;
+  font-weight: bold;
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<a href="../index.html">⬅ Back to Home</a>
+
+<h1>ప్రభువా నీ కృప</h1>
+
+<pre id="lyrics">
+ప్రభువా నీ కృప తలంచుచు నే స్తుతింతును 
+నా జీవిత కాలమంతా నిన్నే ఘన పరుతును (2) 
+దేవా ప్రాణ త్యాగము ధ్యానించుచు 
+ప్రకటింతు నాలో ప్రాణం ఉన్నంత వరకు (2)   ||ప్రభు|| 
+
+తడిపెను నా హృదయ సీమను నీ వాక్యపు జల్లులు 
+కురిసెను నీ కృప హెర్మోను మంచు వలే (2) 
+విరబూసే నాలో ఫలములు మెండుగా 
+హర్షించే నా హ్రుదయం ఆనందగాయమై (2)   ||ప్రభు|| 
+
+నా గిన్నే నిండి పోర్లేను నీ సమృద్ధి దీవెన తో 
+ప్రవహించె నీ ఆత్మ జీవ నదివలెను (2) 
+మోడైన బ్రతుకు చిగురించె నీలోనే 
+నిట్టూర్పు లే నాలో స్తుతి గీతమాయెను (2)   ||ప్రభు||  
+
+నా హృదయ క్షేత్ర మందు కొలువైన యేసయ్యా 
+విరజిమ్మే నాలోన నీ ఆరని కాంతులు (2) 
+ఎద నిండె నాలో ఆత్మీయ తలపులలో 
+పులకించి నా హృదయం  స్తుతి చేసి పాడెను (2)       ||ప్రభు||  ు
+</pre>
+
+<button onclick="downloadPDF()">⬇ Download PDF</button>
+
+<script>
+function downloadPDF() {
+  const text = document.getElementById("lyrics").innerText;
+  const blob = new Blob([text], { type: "application/pdf" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "prabhuva-nee-krupa.pdf";
+  a.click();
+}
+</script>
+
+</div>
+</body>
+</html>
