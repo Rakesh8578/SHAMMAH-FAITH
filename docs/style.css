@@ -93,3 +93,28 @@ body {
   z-index: 10;
 }
 
+/* MOBILE FIX */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  pre {
+    font-size: 16px;
+  }
+
+  button {
+    width: 100%;
+    margin: 6px 0;
+  }
+}
+
+
