@@ -62,37 +62,61 @@ a{ color:#2e7d32; font-weight:bold; text-decoration:none; }
 
 </pre>
 
-<button onclick="downloadPDF()">⬇ Download PDF</button>
-<button onclick="shareSong()">📤 Share</button>
+<!-- 🔽 BUTTONS AT END -->
+<div style="margin-top:20px;">
+  <button onclick="downloadPDF()">📄 Download PDF</button>
+  <button onclick="shareSong()">📤 Share</button>
+</div>
 
-<!-- ✅ SCRIPT MUST BE HERE (BOTTOM) -->
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script>
-function downloadPDF() {
-  const title = document.getElementById("songTitle").innerText;
-  const lyrics = document.getElementById("lyrics").innerText;
+/* ========= DOWNLOAD REAL PDF ========= */
+async function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF("p", "mm", "a4");
 
-  const html =
-    "<html><body style='font-family:Noto Sans Telugu;white-space:pre-wrap;'>" +
-    "<h1>" + title + "</h1>" +
-    "<pre>" + lyrics + "</pre>" +
-    "</body></html>";
+  const fontUrl = "../font/NotoSansTelugu-Regular.ttf";
+  const fontData = await fetch(fontUrl).then(r => r.arrayBuffer());
 
-  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = title + ".html";
-  a.click();
+  pdf.addFileToVFS("NotoSansTelugu.ttf", fontData);
+  pdf.addFont("NotoSansTelugu.ttf", "NotoSansTelugu", "normal");
+  pdf.setFont("NotoSansTelugu");
+
+  const title = document.getElementById("song-title").innerText;
+  const lyrics = document.getElementById("song-lyrics").innerText;
+
+  pdf.setFontSize(16);
+  pdf.text(title, 10, 20);
+
+  pdf.setFontSize(12);
+  const lines = pdf.splitTextToSize(lyrics, 180);
+  pdf.text(lines, 10, 35);
+
+  pdf.save(title + ".pdf");
 }
 
+/* ========= SHARE SONG ========= */
 function shareSong() {
-  const title = document.getElementById("songTitle").innerText;
+  const title = document.getElementById("song-title").innerText;
   const url = window.location.href;
+  const text = `${title}\n\n${url}`;
 
-  const shareUrl =
-    "https://api.whatsapp.com/send?text=" +
-    encodeURIComponent(title + "\n\n" + url);
-
-  window.open(shareUrl, "_blank");
+  // Mobile devices
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      text: title,
+      url: url
+    });
+  } 
+  // Desktop fallback (WhatsApp Web)
+  else {
+    const whatsappUrl =
+      "https://wa.me/?text=" + encodeURIComponent(text);
+    window.open(whatsappUrl, "_blank");
+  }
 }
 </script>
 
