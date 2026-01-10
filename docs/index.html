@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="te">
+ 
+<head>
+  <meta charset="UTF-8">
 
+  <!-- Google verification (keep it) -->
+  <meta name="google-site-verification" content="lUPSsgc6lHV0x01c--vS10lxpLyAGBt4yEd3G6rapvo" />
+
+  <title>SHAMMAH FAITH</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <img src="./logo.jpg" class="logo" alt="Shammah Faith Logo">
+    <h1>SHAMMAH FAITH</h1>
+    <p>Telugu Christian Song Lyrics</p>
+  </header>
+
+  <!-- SEARCH -->
+  <input
+    type="text"
+    id="searchBox"
+    placeholder="పాట పేరు టైప్ చేయండి..."
+    onkeyup="searchSongs()"
+  >
+
+  <!-- SONG BUTTONS -->
+  <div id="songButtons">
+  <button 
+    onclick= "openSong('thara-velasindhi.html')">
+    తార వెలిసింది
+  </button>
+    <button onclick="openSong('prabhuva-nee-krupa.html')">
+     ప్రభువా నీ కృప</button>
+    <button onclick="openSong('ninene-nammukunnanaya.html')">
+     నిన్నే నిన్నే నమ్ముకున్నానయ్య</button>
+  </div>
+
+<script>
+  function openSong(page) {
+  window.location.href = "songs/" + page;}
+
+    
+function searchSongs() {
+  const val = 
+    document.getElementById("searchBox").value.toLowerCase();
+  document.querySelectorAll("#songButtons button").forEach(btn => {
+    btn.style.display=
+   btn.innerText.toLowerCase().includes(val)
+                   ? "block"
+                   : "none";
+  });
+}
+</script>
+
+ <script scr = "script.js"></script>
+</body>
+</html>
