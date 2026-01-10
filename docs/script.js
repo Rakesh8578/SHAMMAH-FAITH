@@ -1,4 +1,4 @@
-let currentSongTitle = "";
+/* ================= SONG DATA ================= */
 
 const songs = {
   1: {
@@ -9,70 +9,98 @@ const songs = {
 రాజులకు రాజు పుట్టాడని
 యూదుల రాజు ఉదయించాడని (2)`
   },
-
   2: {
     title: "ప్రభువా నీ కృప",
-    lyrics: `ప్రభువా నీ కృప అపారం
-నీ ప్రేమ శాశ్వతం`
+    lyrics: `ప్రభువా నీ కృప తలంచుచు నే స్తుతింతును
+నా జీవిత కాలమంతా నిన్నే ఘన పరుతును`
   },
-
   3: {
-    title: "నిన్నే నమ్ముకున్నానయ్య",
-    lyrics: `నిన్నే నమ్ముకున్నానయ్య
-నీవే నా ఆధారం`
+    title: "నిన్నే నిన్నే నమ్ముకున్నానయ్య",
+    lyrics: `నిన్నే నిన్నే నమ్ముకున్నానయ్య
+నన్ను విడువక నడిపించు యేసయ్య`
   }
 };
 
-function showSong(id) {
-  const song = songs[id];
-  if (!song) return;
+/* ================= STATE ================= */
 
-  document.getElementById("lyrics").innerText = song.lyrics;
-  currentSongTitle = song.title;
+let currentSongId = null;
+
+/* ================= SHOW SONG ================= */
+
+function showSong(id) {
+  currentSongId = id;
+
+  document.getElementById("lyrics").innerText =
+    songs[id].lyrics;
 }
 
+/* ================= SEARCH ================= */
+
+function searchSongs() {
+  const val = document.getElementById("searchBox").value.toLowerCase();
+
+  document.querySelectorAll("#songButtons button").forEach(btn => {
+    const text = btn.innerText.toLowerCase();
+    btn.style.display = text.includes(val) ? "block" : "none";
+  });
+}
+
+/* ================= DOWNLOAD PDF ================= */
+
 function downloadPDF() {
-  if (!currentSongTitle) {
+  if (!currentSongId) {
     alert("ముందుగా పాటను ఎంచుకోండి");
     return;
   }
 
-  const lyrics = document.getElementById("lyrics").innerText;
+  const song = songs[currentSongId];
 
   const html = `
 <!DOCTYPE html>
 <html lang="te">
 <head>
 <meta charset="UTF-8">
-<title>${currentSongTitle}</title>
+<title>${song.title}</title>
 <style>
-body {
+body{
   font-family: "Noto Sans Telugu", Arial;
   white-space: pre-wrap;
   font-size: 18px;
   padding: 20px;
 }
-h1 { text-align: center; }
+h1{text-align:center;}
 </style>
 </head>
 <body>
-<h1>${currentSongTitle}</h1>
-${lyrics}
+<h1>${song.title}</h1>
+${song.lyrics}
 </body>
-</html>
-`;
+</html>`;
 
   const blob = new Blob([html], { type: "text/html;charset=utf-8" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = currentSongTitle + ".html";
+  a.download = song.title + ".html";
   a.click();
 }
 
+/* ================= SHARE (WHATSAPP) ================= */
 
+function shareSong() {
+  if (!currentSongId) {
+    alert("ముందుగా పాటను ఎంచుకోండి");
+    return;
+  }
 
+  const song = songs[currentSongId];
+  const text =
+    song.title + "\n\n" +
+    song.lyrics + "\n\n" +
+    window.location.href;
 
+  const url =
+    "https://api.whatsapp.com/send?text=" +
+    encodeURIComponent(text);
 
-
-
-
+  window.open(url, "_blank");
+}
