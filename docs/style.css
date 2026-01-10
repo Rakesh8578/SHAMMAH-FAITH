@@ -74,6 +74,13 @@ body {
   clear: both;
 }
 
+body {
+  overflow-x:  hidden;
+}
+*  {
+   pointer-events: auto;
+}
+
 
 
 
