@@ -2,50 +2,42 @@
 <html lang="te">
 <head>
 <meta charset="UTF-8">
-<title>తార వెలిసింది – SHAMMAH FAITH</title>
+<title>తార వెలిసింది</title>
 
 <style>
-body {
-  font-family: "Noto Sans Telugu", Arial;
-  background: #f5f5f5;
-  padding: 20px;
+body{
+  font-family:"Noto Sans Telugu", Arial;
+  background:#f5f5f5;
+  padding:20px;
 }
-.container {
-  max-width: 800px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 6px;
+.container{
+  max-width:800px;
+  margin:auto;
+  background:#fff;
+  padding:20px;
+  border-radius:6px;
 }
-pre {
-  white-space: pre-wrap;
-  font-size: 18px;
-  line-height: 1.6;
+h1{ text-align:center; color:#2e7d32; }
+pre{ white-space:pre-wrap; font-size:18px; line-height:1.6; }
+button{
+  padding:10px 14px;
+  margin:6px;
+  background:#2e7d32;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
 }
-button {
-  padding: 10px 14px;
-  margin: 5px;
-  background: #2e7d32;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-a {
-  color: #2e7d32;
-  font-weight: bold;
-  text-decoration: none;
-}
+a{ color:#2e7d32; font-weight:bold; text-decoration:none; }
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
 <a href="../index.html">⬅ Back to Home</a>
 
-<h1>తార వెలిసింది</h1>
+<h1 id="songTitle">తార వెలిసింది</h1>
 
 <pre id="lyrics">
 తార వెలిసింది ఆ నింగిలో ధరణి మురిసింది
@@ -73,7 +65,6 @@ a {
 నిను మనసారా కొలిచాములే
 మా యూదుల రాజువు నీవేనని
 నిను ఘనపరచి పొగిడాములే        ||తార||
-  
 </pre>
 
 <button onclick="downloadPDF()">⬇ Download PDF</button>
@@ -82,34 +73,36 @@ a {
 </div>
 
 <script>
-function getLyrics() {
-  return document.getElementById("lyrics").innerText;
+function getTitle(){
+  return document.getElementById("songTitle").innerText.trim();
+}
+function getLyrics(){
+  return document.getElementById("lyrics").innerText.trim();
 }
 
-function downloadPDF() {
-  const html = `
-  <html><body style="font-family:Noto Sans Telugu; white-space:pre-wrap;">
-  <h2>తార వెలిసింది</h2>
-  ${getLyrics()}
-  </body></html>`;
+function downloadPDF(){
+  const title=getTitle();
+  const lyrics=getLyrics();
 
-  const blob = new Blob([html], { type: "text/html" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "thara-velasindhi.html";
+  const html=`
+  <html><head><meta charset="UTF-8">
+  <style>
+    body{font-family:"Noto Sans Telugu",Arial;white-space:pre-wrap;font-size:18px;}
+    h1{text-align:center;}
+  </style></head>
+  <body><h1>${title}</h1>${lyrics}</body></html>`;
+
+  const blob=new Blob([html],{type:"application/pdf"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=title+".pdf";
   a.click();
 }
 
-function shareSong() {
-  const text =
-    "తార వెలిసింది – Telugu Christian Song Lyrics\n\n" +
-    window.location.href;
-
-  const url =
-    "https://api.whatsapp.com/send?text=" +
-    encodeURIComponent(text);
-
-  window.open(url, "_blank");
+function shareSong(){
+  const text=getTitle()+"\n\n"+window.location.href;
+  const url="https://api.whatsapp.com/send?text="+encodeURIComponent(text);
+  window.open(url,"_blank");
 }
 </script>
 
