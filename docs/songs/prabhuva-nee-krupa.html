@@ -1,126 +1,70 @@
 <!DOCTYPE html>
 <html lang="te">
 <head>
-  <meta name="description"
-content="ప్రభువా నీ కృప తలంచుచ Telugu Christian song lyrics from SHAMMAH FAITH">
-
-<meta name="keywords"
-content="ప్రభువా నీ కృప తలంచుచ, Telugu Christian Songs, Jesus Songs Telugu, Shammah Faith">
 <meta charset="UTF-8">
-  
-<title>ప్రభువా నీ కృప తలంచుచు</title>
-
-<style>
-body{
-  font-family:"Noto Sans Telugu", Arial;
-  background:#f5f5f5;
-  padding:20px;
-}
-.container{
-  max-width:800px;
-  margin:auto;
-  background:#fff;
-  padding:20px;
-  border-radius:6px;
-}
-h1{ text-align:center; color:#2e7d32; }
-pre{ white-space:pre-wrap; font-size:18px; line-height:1.6; }
-button{
-  padding:10px 14px;
-  margin:6px;
-  background:#2e7d32;
-  color:#fff;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-}
-a{ color:#2e7d32; font-weight:bold; text-decoration:none; }
-</style>
+<title>ప్రభువా నీ కృప</title>
 </head>
 
-<body>
-<div class="container">
+<body style="font-family:Noto Sans Telugu, Arial; padding:20px;">
 
 <a href="../index.html">⬅ Back to Home</a>
 
-<h1 id="songTitle">ప్రభువా నీ కృప తలంచుచు</h1>
+<h1 id="songTitle">ప్రభువా నీ కృప</h1>
 
 <pre id="lyrics">
 ప్రభువా నీ కృప తలంచుచు నే స్తుతింతును 
 నా జీవిత కాలమంతా నిన్నే ఘన పరుతును (2) 
 దేవా ప్రాణ త్యాగము ధ్యానించుచు 
-ప్రకటింతు నాలో ప్రాణం ఉన్నంత వరకు (2)   ||ప్రభు|| 
+ప్రకటింతు నాలో ప్రాణం ఉన్నంత వరకు (2)   " ప్రభు " 
 
 తడిపెను నా హృదయ సీమను నీ వాక్యపు జల్లులు 
 కురిసెను నీ కృప హెర్మోను మంచు వలే (2) 
 విరబూసే నాలో ఫలములు మెండుగా 
-హర్షించే నా హ్రుదయం ఆనందగాయమై (2)  ||ప్రభు|| 
+హర్షించే నా హ్రుదయం ఆనందగాయమై (2)   " ప్రభు " 
 
 నా గిన్నే నిండి పోర్లేను నీ సమృద్ధి దీవెన తో 
 ప్రవహించె నీ ఆత్మ జీవ నదివలెను (2) 
 మోడైన బ్రతుకు చిగురించె నీలోనే 
-నిట్టూర్పు లే నాలో స్తుతి గీతమాయెను (2)   ||ప్రభు|| 
+నిట్టూర్పు లే నాలో స్తుతి గీతమాయెను (2)   " ప్రభు " 
 
 నా హృదయ క్షేత్ర మందు కొలువైన యేసయ్యా 
 విరజిమ్మే నాలోన నీ ఆరని కాంతులు (2) 
 ఎద నిండె నాలో ఆత్మీయ తలపులలో 
-పులకించి నా హృదయం  స్తుతి చేసి పాడెను (2)      ||ప్రభు||
-ం
+పులకించి నా హృదయం  స్తుతి చేసి పాడెను (2)       " ప్రభు " 
+
 </pre>
 
 <button onclick="downloadPDF()">⬇ Download PDF</button>
 <button onclick="shareSong()">📤 Share</button>
 
-
+<!-- ✅ SCRIPT MUST BE HERE (BOTTOM) -->
 <script>
-function downloadPDF(){
+function downloadPDF() {
   const title = document.getElementById("songTitle").innerText;
   const lyrics = document.getElementById("lyrics").innerText;
 
-  const html = `
-  <html>
-  <head>
-    <meta charset="UTF-8">
-    <style>
-      body{
-        font-family:"Noto Sans Telugu", Arial;
-        padding:30px;
-      }
-      h1{
-        text-align:center;
-        color:#2e7d32;
-      }
-      pre{
-        white-space:pre-wrap;
-        font-size:18px;
-        line-height:1.6;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>${title}</h1>
-    <pre>${lyrics}</pre>
-  </body>
-  </html>`;
+  const html =
+    "<html><body style='font-family:Noto Sans Telugu;white-space:pre-wrap;'>" +
+    "<h1>" + title + "</h1>" +
+    "<pre>" + lyrics + "</pre>" +
+    "</body></html>";
 
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(
-    new Blob([html], { type: "application/pdf" })
-  );
-  a.download = title + ".pdf";
+  a.href = URL.createObjectURL(blob);
+  a.download = title + ".html";
   a.click();
+}
 
-  function shareSong() {
+function shareSong() {
   const title = document.getElementById("songTitle").innerText;
   const url = window.location.href;
 
-  const text = `${title} – Telugu Christian Song Lyrics\n\n${url}`;
-
-  const whatsappUrl =
+  const shareUrl =
     "https://api.whatsapp.com/send?text=" +
-    encodeURIComponent(text);
+    encodeURIComponent(title + "\n\n" + url);
 
-  window.open(whatsappUrl, "_blank");
+  window.open(shareUrl, "_blank");
 }
 </script>
 
