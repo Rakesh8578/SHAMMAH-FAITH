@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="te">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+ 
 <head>
   <meta charset="UTF-8">
 
@@ -29,35 +29,40 @@
   <!-- SONG BUTTONS -->
   <div id="songButtons">
   <button 
-    onclick= "opensong('thara-velasindhi.html')">
+    onclick= "openSong('thara-velasindhi.html')">
     తార వెలిసింది
   </button>
-  </div>
     <button onclick="showSong(2)" data-search="prabhuva krupa">ప్రభువా నీ కృప</button></a>
     <button onclick="showSong(3)" data-search="ninene nammukunnanaya">నిన్నే నిన్నే నమ్ముకున్నానయ్య</button></a>
   </div>
 
 <script>
+  function openSong(page) {
+  window.location.href = "songs/" + page;
+
+    
 function searchSongs() {
-  const val = searchBox.value.toLowerCase();
-  document.querySelectorAll("#songButtons a").forEach(a=>{
-    a.style.display = a.innerText.toLowerCase().includes(val)
-      ? "block" : "none";
+  const val = 
+    document.getElementById("searchBox").value.toLowerCase();
+  document.querySelectorAll("#songButtons button").forEach(btn => {
+    btn.style.display=
+   btn.innerText.toLowerCase().includes(val)
+                   ? "block"
+                   : "none";
   });
 }
-
-<script>
-function openSong(page) {
-  window.location.href = "songs/" + page;
-}
 </script>
-  
+
  <script scr = "script.js"></script>
 </body>
 </html>
 
 
 
+searchBox.value.toLowerCase();
+  document.querySelectorAll("#songButtons a").forEach(a=>{
+    a.style.display = a.innerText.toLowerCase().includes(val)
+      ? "block" : "none";
 
 
 
