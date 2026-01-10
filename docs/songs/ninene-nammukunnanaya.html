@@ -49,7 +49,6 @@ a {
 
 
 <pre id="lyrics">
-
   నిన్నే నిన్నే నమ్ముకున్నానయ్య
 నన్ను నన్ను వీడిపోబోకయ్యా (2)
 నువ్వు లేక నేను బ్రతుకలేనయ్య
@@ -66,3 +65,44 @@ a {
 చీకు చింతలు నన్ను చుట్టినా
 చెలిమే చితికి నన్ను చేర్చినా (2)
 చెలిమే చితికి నన్ను చేర్చినా                 ||నిన్నే||
+  </pre>
+
+<button onclick="downloadPDF()">⬇ Download PDF</button>
+<button onclick="shareSong()">📤 Share</button>
+
+</div>
+
+<script>
+function getLyrics() {
+  return document.getElementById("lyrics").innerText;
+}
+
+function downloadPDF() {
+  const html = `
+  <html><body style="font-family:Noto Sans Telugu; white-space:pre-wrap;">
+  <h2>నిన్నే నిన్నే నమ్ముకున్నానయ్/h2>
+  ${getLyrics()}
+  </body></html>`;
+
+  const blob = new Blob([html], { type: "text/html" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "thara-velasindhi.html";
+  a.click();
+}
+
+function shareSong() {
+  const text =
+    "నిన్నే నిన్నే నమ్ముకున్నానయ్– Telugu Christian Song Lyrics\n\n" +
+    window.location.href;
+
+  const url =
+    "https://api.whatsapp.com/send?text=" +
+    encodeURIComponent(text);
+
+  window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
