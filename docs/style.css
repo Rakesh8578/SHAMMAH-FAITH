@@ -1,0 +1,106 @@
+/* ================= SONG DATA ================= */
+
+const songs = {
+  1: {
+    title: "తార వెలిసింది",
+    lyrics: `తార వెలిసింది ఆ నింగిలో ధరణి మురిసింది
+దూత వచ్చింది సువార్తను మాకు తెలిపింది (2)
+
+రాజులకు రాజు పుట్టాడని
+యూదుల రాజు ఉదయించాడని (2)`
+  },
+  2: {
+    title: "ప్రభువా నీ కృప",
+    lyrics: `ప్రభువా నీ కృప తలంచుచు నే స్తుతింతును
+నా జీవిత కాలమంతా నిన్నే ఘన పరుతును`
+  },
+  3: {
+    title: "నిన్నే నిన్నే నమ్ముకున్నానయ్య",
+    lyrics: `నిన్నే నిన్నే నమ్ముకున్నానయ్య
+నన్ను విడువక నడిపించు యేసయ్య`
+  }
+};
+
+/* ================= STATE ================= */
+
+let currentSongId = null;
+
+/* ================= SHOW SONG ================= */
+
+function showSong(id) {
+  currentSongId = id;
+
+  document.getElementById("lyrics").innerText =
+    songs[id].lyrics;
+}
+
+/* ================= SEARCH ================= */
+
+function searchSongs() {
+  const val = document.getElementById("searchBox").value.toLowerCase();
+
+  document.querySelectorAll("#songButtons button").forEach(btn => {
+    const text = btn.innerText.toLowerCase();
+    btn.style.display = text.includes(val) ? "block" : "none";
+  });
+}
+
+/* ================= DOWNLOAD PDF ================= */
+
+function downloadPDF() {
+  if (!currentSongId) {
+    alert("ముందుగా పాటను ఎంచుకోండి");
+    return;
+  }
+
+  const song = songs[currentSongId];
+
+  const html = `
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<title>${song.title}</title>
+<style>
+body{
+  font-family: "Noto Sans Telugu", Arial;
+  white-space: pre-wrap;
+  font-size: 18px;
+  padding: 20px;
+}
+h1{text-align:center;}
+</style>
+</head>
+<body>
+<h1>${song.title}</h1>
+${song.lyrics}
+</body>
+</html>`;
+
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = song.title + ".html";
+  a.click();
+}
+
+/* ================= SHARE (WHATSAPP) ================= */
+
+function shareSong() {
+  if (!currentSongId) {
+    alert("ముందుగా పాటను ఎంచుకోండి");
+    return;
+  }
+
+  const song = songs[currentSongId];
+  const text =
+    song.title + "\n\n" +
+    song.lyrics + "\n\n" +
+    window.location.href;
+
+  const url =
+    "https://api.whatsapp.com/send?text=" +
+    encodeURIComponent(text);
+
+  window.open(url, "_blank");
+}
