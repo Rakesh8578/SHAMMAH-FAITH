@@ -85,31 +85,61 @@ function getLyrics(){
   return document.getElementById("lyrics").innerText.trim();
 }
 
+<script>
 function downloadPDF(){
-  const title=getTitle();
-  const lyrics=getLyrics();
+  const title = document.getElementById("songTitle").innerText;
+  const lyrics = document.getElementById("lyrics").innerText;
 
-  const html=`
-  <html><head><meta charset="UTF-8">
-  <style>
-    body{font-family:"Noto Sans Telugu",Arial;white-space:pre-wrap;font-size:18px;}
-    h1{text-align:center;}
-  </style></head>
-  <body><h1>${title}</h1>${lyrics}</body></html>`;
+  const html = `
+  <html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      body{
+        font-family:"Noto Sans Telugu", Arial;
+        padding:30px;
+      }
+      h1{
+        text-align:center;
+        color:#2e7d32;
+      }
+      pre{
+        white-space:pre-wrap;
+        font-size:18px;
+        line-height:1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>${title}</h1>
+    <pre>${lyrics}</pre>
+  </body>
+  </html>`;
 
-  const blob=new Blob([html],{type:"application/pdf"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download=title+".pdf";
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(
+    new Blob([html], { type: "application/pdf" })
+  );
+  a.download = title + ".pdf";
   a.click();
-}
 
-function shareSong(){
-  const text=getTitle()+"\n\n"+window.location.href;
-  const url="https://api.whatsapp.com/send?text="+encodeURIComponent(text);
-  window.open(url,"_blank");
+  function shareSong() {
+  const title = document.getElementById("songTitle").innerText;
+  const url = window.location.href;
+
+  const text = `${title} – Telugu Christian Song Lyrics\n\n${url}`;
+
+  const whatsappUrl =
+    "https://api.whatsapp.com/send?text=" +
+    encodeURIComponent(text);
+
+  window.open(whatsappUrl, "_blank");
 }
 </script>
+
+
+
+
 
 </body>
 </html>
