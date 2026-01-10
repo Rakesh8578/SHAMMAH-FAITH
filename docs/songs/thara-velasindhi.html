@@ -67,52 +67,21 @@ a{ color:#2e7d32; font-weight:bold; text-decoration:none; }
 నిను ఘనపరచి పొగిడాములే        ||తార||
 </pre>
 
-<div style="margin-top:20px;">
-  <button onclick="downloadPDF()">📄 Download PDF</button>
-  <button onclick="shareSong()">📤 Share</button>
-</div>
+<body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<h1>Test Page</h1>
+
+<button onclick="testPDF()">Test PDF</button>
+<button onclick="testShare()">Test Share</button>
 
 <script>
-async function downloadPDF() {
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF();
-
-  const fontUrl = "../font/NotoSansTelugu-Regular.ttf";
-  const fontData = await fetch(fontUrl).then(r => r.arrayBuffer());
-
-  pdf.addFileToVFS("NotoSansTelugu.ttf", fontData);
-  pdf.addFont("NotoSansTelugu.ttf", "NotoSansTelugu", "normal");
-  pdf.setFont("NotoSansTelugu");
-
-  const title = document.getElementById("song-title").innerText;
-  const lyrics = document.getElementById("song-lyrics").innerText;
-
-  pdf.setFontSize(16);
-  pdf.text(title, 10, 20);
-
-  pdf.setFontSize(12);
-  const lines = pdf.splitTextToSize(lyrics, 180);
-  pdf.text(lines, 10, 35);
-
-  pdf.save(title + ".pdf");
+function testPDF() {
+  alert("PDF button clicked");
 }
 
-function shareSong() {
-  const title = document.getElementById("song-title").innerText;
-  const url = window.location.href;
-
-  if (navigator.share) {
-    navigator.share({ title, url });
-  } else {
-    window.open(
-      "https://wa.me/?text=" + encodeURIComponent(title + "\n" + url),
-      "_blank"
-    );
-  }
+function testShare() {
+  alert("Share button clicked");
 }
 </script>
 
 </body>
-</html>
